@@ -1,0 +1,179 @@
+@import "tailwindcss";
+
+/* 🌐 TOKENS BASE */
+:root {
+  /* 🎨 BRAND (CORE) */
+  --color-primary: #132A8E;       /* Azul Sat */
+  --color-accent: #1BFF3C;        /* Verde Core */
+  --color-primary-dark: #0A2540; /* azul profundo premium */
+  /* 🌙 DARK MODE (DEFAULT) */
+  --color-bg-dark: #0A0A0A;
+  --color-surface-dark: #111111;
+  --color-text-dark: #FFFFFF;
+  --color-muted-dark: #6B7280;
+
+  /* 🌞 LIGHT MODE (CORPORATE) */
+  --color-bg-light: #FFFFFF;
+  --color-surface-light: #F6F9FC;
+  --color-text-light: #0A2540;
+  --color-muted-light: #6B7280;
+
+  /* 🎯 ACCENTS (LIGHT MODE) */
+  --color-accent-light: #00D4AA;
+  --color-accent-light-hover: #00B894;
+
+  /* 🔲 BORDER */
+  --color-border: #E5E7EB;
+
+  /* 🎯 FEEDBACK */
+  --color-success: #22C55E;
+  --color-warning: #FFD93D;
+  --color-error: #FF6B6B;
+
+  /* 📏 SPACING */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+
+  /* 🔲 RADIUS */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  /* 🧠 FONTS */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* 🎯 TAILWIND MAPPING */
+@theme inline {
+  --color-background: var(--color-bg-dark);
+  --color-foreground: var(--color-text-dark);
+
+  --color-primary: var(--color-primary);
+  --color-primary-dark: var(--color-primary-dark); 
+  --color-accent: var(--color-accent);
+  --color-muted: var(--color-muted-dark);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+/* 🌙 DEFAULT (DARK MODE) */
+body {
+  background: var(--color-bg-dark);
+  color: var(--color-text-dark);
+  font-family: var(--font-sans);
+}
+
+/* 🌞 LIGHT MODE ACTIVABLE */
+.light {
+  background: var(--color-bg-light);
+  color: var(--color-text-light);
+}
+
+/* 📦 LAYOUT UTILITIES */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.section {
+  padding: var(--space-3xl) 0;
+}
+
+.hero {
+  padding: var(--space-4xl) 0;
+}
+
+/* 🎨 BUTTONS (GLOBAL) */
+.btn-primary {
+  background: var(--color-accent);
+  color: black;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* 🌞 LIGHT BUTTONS */
+.light .btn-primary {
+  background: var(--color-accent-light);
+  color: var(--color-text-light);
+}
+
+.light .btn-primary:hover {
+  background: var(--color-accent-light-hover);
+}
+
+/* 🔹 SECONDARY */
+.btn-secondary {
+  background: transparent;
+  border: 2px solid currentColor;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+}
+
+/* 👻 GHOST */
+.btn-ghost {
+  background: transparent;
+  color: var(--color-accent-light);
+  padding: 12px 24px;
+}
+
+/* 🧩 CARDS DARK */
+.card {
+  background: var(--color-surface-dark);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* 🧩 CARDS LIGHT */
+.light .card {
+  background: var(--color-bg-light);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* 🔥 GRADIENTS (TOKEN BASED) */
+
+.gradient-primary {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-accent-light) 100%
+  );
+}
+
+.gradient-secondary {
+  background: linear-gradient(
+    90deg,
+    var(--color-accent-light) 0%,
+    var(--color-accent-light-hover) 100%
+  );
+}
+
+.gradient-dark {
+  background: linear-gradient(
+    180deg,
+    var(--color-primary) 0%,
+    #1A3A5C 100%
+  );
+}
