@@ -7,6 +7,8 @@ import {
   Users,
   Zap,
   Server,
+  Settings,
+  Workflow,
 } from "lucide-react";
 
 export const servicesData: ServiceCategory[] = [
@@ -299,7 +301,7 @@ export const servicesData: ServiceCategory[] = [
     id: "SRV-CUSTOM",
     category: "Desarrollo a Medida",
     subtitle: "Soluciones personalizadas",
-    icon: Server,
+    icon: Workflow,
 
     levels: [
       {
@@ -319,6 +321,224 @@ export const servicesData: ServiceCategory[] = [
         ],
         deliverables: [
           "Proyecto completo según alcance",
+        ],
+      },
+    ],
+  },
+
+  {
+    id: "SRV-MNT",
+    category: "Mantenimiento y Soporte",
+    subtitle: "Planes de soporte, seguridad y evolución",
+    icon: Settings,
+
+    levels: [
+      {
+        id: "SRV-MNT-01",
+        name: "Básico",
+        level: "🔵 Operación continua",
+        complexity: "Soporte básico",
+        time: "Mensual",
+        price: "Desde $200.000 COP / mes",
+
+        description:
+          "Actualizaciones de seguridad y backup mensual.",
+
+        stack: ["DevOps", "Monitoreo", "Seguridad"],
+
+        features: [
+          "Actualizaciones de seguridad",
+          "Backup mensual",
+          "Monitoreo básico",
+        ],
+
+        deliverables: [
+          "Reporte mensual",
+          "Soporte básico",
+        ],
+      },
+
+      {
+        id: "SRV-MNT-02",
+        name: "Estándar",
+        level: "🔵 Operación continua",
+        complexity: "Soporte + monitoreo",
+        time: "Mensual",
+        price: "Desde $450.000 COP / mes",
+
+        description:
+          "Soporte técnico + monitoreo activo.",
+
+        stack: ["DevOps", "Monitoring", "Security"],
+
+        features: [
+          "Todo lo del básico",
+          "Soporte 8h/mes",
+          "Monitoreo activo",
+        ],
+
+        deliverables: [
+          "Reportes detallados",
+          "Soporte extendido",
+        ],
+      },
+
+      {
+        id: "SRV-MNT-03",
+        name: "Avanzado",
+        level: "🔵 Operación continua",
+        complexity: "Soporte + evolución",
+        time: "Mensual",
+        price: "Desde $850.000 COP / mes",
+
+        description:
+          "Incluye mejoras evolutivas y prioridad.",
+
+        stack: ["DevOps", "Cloud", "Security"],
+
+        features: [
+          "Todo lo del estándar",
+          "4h desarrollo evolutivo",
+          "Prioridad en soporte",
+        ],
+
+        deliverables: [
+          "Mejoras continuas",
+          "Optimización mensual",
+        ],
+      },
+
+      {
+        id: "SRV-MNT-04",
+        name: "Empresarial",
+        level: "🔵 Operación continua",
+        complexity: "SLA 24/7",
+        time: "Mensual",
+
+        price: "Cotización",
+
+        description:
+          "Soporte 24/7 con SLA empresarial.",
+
+        stack: ["DevOps", "AWS", "Security"],
+
+        features: [
+          "SLA 24/7",
+          "Respuesta inmediata",
+          "Equipo dedicado",
+        ],
+
+        deliverables: [
+          "Soporte completo",
+        ],
+      },
+    ],
+  },
+
+  {
+    id: "SRV-HOST",
+    category: "Hosting y Deploy",
+    subtitle: "Despliegue y puesta en producción",
+    icon: Server,
+
+    levels: [
+      {
+        id: "SRV-HOST-01",
+        name: "Landing / Sitio básico",
+        level: "🔵 Infraestructura",
+        complexity: "Básico",
+        time: "1-2 días",
+        price: "$400.000 - $800.000 COP",
+
+        description:
+          "Configuración y despliegue en hosting optimizado para sitios estáticos o landing pages.",
+
+        stack: ["Vercel", "Hostinger"],
+
+        features: [
+          "Deploy automático",
+          "Configuración de dominio",
+          "SSL incluido",
+        ],
+
+        deliverables: [
+          "Sitio en producción",
+          "Configuración DNS",
+        ],
+      },
+
+      {
+        id: "SRV-HOST-02",
+        name: "Sitio corporativo",
+        level: "🔵 Infraestructura",
+        complexity: "Intermedio",
+        time: "2-4 días",
+        price: "$800.000 - $1.500.000 COP",
+
+        description:
+          "Deploy con CMS y optimización básica de performance.",
+
+        stack: ["Cloudways", "SiteGround"],
+
+        features: [
+          "Deploy con CMS",
+          "Optimización SEO base",
+          "SSL + dominio",
+        ],
+
+        deliverables: [
+          "Sitio en producción",
+          "CMS funcionando",
+        ],
+      },
+
+      {
+        id: "SRV-HOST-03",
+        name: "E-commerce",
+        level: "🔵 Infraestructura",
+        complexity: "Avanzado",
+        time: "3-7 días",
+        price: "$1.200.000 - $3.000.000 COP",
+
+        description:
+          "Infraestructura para tiendas online con alta disponibilidad.",
+
+        stack: ["AWS", "Cloudways"],
+
+        features: [
+          "Deploy escalable",
+          "Balanceo básico",
+          "Seguridad SSL + firewall",
+          "Backup automático del servidor",
+        ],
+
+        deliverables: [
+          "Tienda en producción",
+          "Configuración completa",
+        ],
+      },
+
+      {
+        id: "SRV-HOST-04",
+        name: "Web App / Alto tráfico",
+        level: "🔵 Infraestructura",
+        complexity: "Enterprise",
+        time: "5-10 días",
+        price: "Cotización",
+
+        description:
+          "Arquitectura cloud para aplicaciones escalables.",
+
+        stack: ["AWS", "Azure"],
+
+        features: [
+          "Escalabilidad",
+          "CI/CD",
+          "Monitoreo",
+        ],
+
+        deliverables: [
+          "Infraestructura completa",
         ],
       },
     ],
