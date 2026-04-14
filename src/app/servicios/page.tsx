@@ -8,23 +8,31 @@ export default function ServiciosPage() {
   return (
     <main>
 
-      {/* HERO */}
+      {/* 🚀 HERO */}
       <Hero
         title="SOLUCIONES TECNOLÓGICAS"
         highlight="INTEGRALES"
-        description="Desde desarrollo de software hasta inteligencia artificial y ciberseguridad."
-        ctaText="Ver servicios"
-        ctaLink="#servicios"
+        description="Desde desarrollo de software hasta inteligencia artificial y ciberseguridad, creamos soluciones escalables y seguras."
+        
+        ctaPrimaryText="Ver servicios"
+        ctaPrimaryLink="#servicios"
+
+        ctaSecondaryText="Hablemos"
+        ctaSecondaryLink="https://wa.me/573022016072"
+
         background="/img/hero/bg_3.png"
-        variant="left"
+        variant="services"
         height="full"
       />
 
-      {/* 🔥 AQUÍ VA TU SECCIÓN IMPORTANTE */}
+      {/* 📦 SECCIONES */}
       <ServicesSection />
       <ProcessSection />
       <BenefitsSection />
+
+      {/* 🔥 CTA FINAL */}
       <CTASection />
+
     </main>
   );
 }
