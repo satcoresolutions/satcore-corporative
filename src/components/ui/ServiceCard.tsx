@@ -53,7 +53,6 @@ export default function ServiceCard({
     bg-[color:var(--color-bg-light)]
     border border-[color:var(--color-border)]
     text-[color:var(--color-primary-dark)]
-    cursor-pointer 
     hover:shadow-[0_10px_40px_rgba(0,0,0,0.08)]
     hover:-translate-y-2 hover:shadow-lg
   `,
@@ -62,7 +61,6 @@ export default function ServiceCard({
     bg-[color:var(--color-surface-dark)]
     border border-[color:var(--color-border)]
     text-[color:var(--color-text-dark)]
-    cursor-pointer 
     hover:shadow-[0_0_25px_rgba(27,255,60,0.12)]
     hover:-translate-y-2 hover:shadow-lg
   `,

@@ -3,32 +3,32 @@
 /* 🌐 TOKENS BASE */
 :root {
   /* 🎨 BRAND (CORE) */
-  --color-primary: #132A8E;       /* Azul Sat */
-  --color-accent: #1BFF3C;        /* Verde Core */
-  --color-primary-dark: #0A2540; /* azul profundo premium */
+  --color-primary: #132a8e; /* Azul Sat */
+  --color-accent: #1bff3c; /* Verde Core */
+  --color-primary-dark: #0a2540; /* azul profundo premium */
   /* 🌙 DARK MODE (DEFAULT) */
-  --color-bg-dark: #0A0A0A;
+  --color-bg-dark: #0a0a0a;
   --color-surface-dark: #111111;
-  --color-text-dark: #FFFFFF;
-  --color-muted-dark: #6B7280;
+  --color-text-dark: #ffffff;
+  --color-muted-dark: #6b7280;
 
   /* 🌞 LIGHT MODE (CORPORATE) */
-  --color-bg-light: #FFFFFF;
-  --color-surface-light: #F6F9FC;
-  --color-text-light: #0A2540;
-  --color-muted-light: #6B7280;
+  --color-bg-light: #ffffff;
+  --color-surface-light: #f6f9fc;
+  --color-text-light: #0a2540;
+  --color-muted-light: #6b7280;
 
   /* 🎯 ACCENTS (LIGHT MODE) */
-  --color-accent-light: #00D4AA;
-  --color-accent-light-hover: #00B894;
+  --color-accent-light: #00d4aa;
+  --color-accent-light-hover: #00b894;
 
   /* 🔲 BORDER */
-  --color-border: #E5E7EB;
+  --color-border: #e5e7eb;
 
   /* 🎯 FEEDBACK */
-  --color-success: #22C55E;
-  --color-warning: #FFD93D;
-  --color-error: #FF6B6B;
+  --color-success: #22c55e;
+  --color-warning: #ffd93d;
+  --color-error: #ff6b6b;
 
   /* 📏 SPACING */
   --space-xs: 4px;
@@ -57,7 +57,7 @@
   --color-foreground: var(--color-text-dark);
 
   --color-primary: var(--color-primary);
-  --color-primary-dark: var(--color-primary-dark); 
+  --color-primary-dark: var(--color-primary-dark);
   --color-accent: var(--color-accent);
   --color-muted: var(--color-muted-dark);
 
@@ -149,7 +149,7 @@ body {
 .light .card {
   background: var(--color-bg-light);
   border: 1px solid var(--color-border);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 /* 🔥 GRADIENTS (TOKEN BASED) */
@@ -171,13 +171,28 @@ body {
 }
 
 .gradient-dark {
-  background: linear-gradient(
-    180deg,
-    var(--color-primary) 0%,
-    #1A3A5C 100%
-  );
+  background: linear-gradient(180deg, var(--color-primary) 0%, #1a3a5c 100%);
 }
 
+.input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px rgba(27, 255, 60, 0.2);
+}
+
+/* LIGHT MODE */
+.light .input {
+  border: 1px solid var(--color-border);
+}
 
 @keyframes scroll {
   from {
