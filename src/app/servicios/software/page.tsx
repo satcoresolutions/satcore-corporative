@@ -28,8 +28,6 @@ export default function SoftwarePage() {
             {/* 🧭 4. PROCESO (CÓMO TRABAJAMOS) */}
             <SoftwareProcess />
 
-            {/* 📦 5. ALCANCE (QUÉ INCLUYE) */}
-            <SoftwareScope />
 
             {/* 🔐 6. CONFIANZA TÉCNICA */}
             <SoftwareSecurity />
