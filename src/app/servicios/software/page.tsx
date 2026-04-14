@@ -3,7 +3,6 @@ import SoftwareHero from "@/components/sections/services/software/SoftwareHero";
 import SoftwareServiceCatalog from "@/components/sections/services/software/SoftwareServiceCatalog";
 import SoftwareTechStack from "@/components/sections/services/software/SoftwareTechStack";
 import SoftwareProcess from "@/components/sections/services/software/SoftwareProcess";
-import SoftwareScope from "@/components/sections/services/software/SoftwareScope";
 
 // 🔐 nuevos módulos (los que creamos antes)
 import SoftwareLegal from "@/components/sections/services/software/SoftwareLegal";
