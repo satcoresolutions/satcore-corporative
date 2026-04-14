@@ -11,19 +11,27 @@ export default function HomePage() {
   return (
     <main>
 
+      {/* 🚀 HERO */}
       <Hero
         title="IMPULSA TU NEGOCIO"
         highlight="CON TECNOLOGÍA"
-        description="Software a medida que es tu propiedad intelectual..."
-        ctaText="Comienza tu transformación"
-        ctaLink="/contacto"
+        description="Desarrollamos software a medida, escalable y seguro, diseñado para automatizar procesos y hacer crecer tu empresa."
+
+        ctaPrimaryText="Comienza tu transformación"
+        ctaPrimaryLink="/contacto"
+
+        ctaSecondaryText="Hablar por WhatsApp"
+        ctaSecondaryLink="https://wa.me/573022016072"
+
         background="/img/hero/bg_2.png"
         variant="center"
         height="full"
       />
+
+      {/* ⚙️ SERVICIOS */}
       <ServicesHome />
 
-      {/* BLOQUE COMBINADO */}
+      {/* 🔥 BLOQUE COMBINADO */}
       <Section variant="dark" paddingY="sm">
         <div className="grid gap-16 md:grid-cols-[1fr_2.5fr] items-center px-0 w-full">
           <WhySatCore />
@@ -31,9 +39,13 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* NUEVAS SECCIONES */}
+      {/* 📦 PORTAFOLIO */}
       <Portfolio />
+
+      {/* ⭐ TESTIMONIOS */}
       <Testimonials />
+
+      {/* 🚀 CTA FINAL */}
       <CTA />
 
     </main>

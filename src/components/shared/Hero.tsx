@@ -3,36 +3,61 @@
 import Image from "next/image";
 import Link from "next/link";
 
+type HeroVariant =
+  | "center"
+  | "left"
+  | "services"
+  | "about"
+  | "projects"
+  | "contact";
+
 interface HeroProps {
   title: string;
   highlight: string;
   description: string;
-  ctaText: string;
-  ctaLink: string;
-  background: string;
 
-  variant?: "center" | "left";
+  ctaPrimaryText: string;
+  ctaPrimaryLink: string;
+
+  ctaSecondaryText?: string;
+  ctaSecondaryLink?: string;
+
+  background: string;
+  variant?: HeroVariant;
   height?: "full" | "medium";
 }
+
+/* 🧠 detecta links externos */
+const isExternal = (url: string) =>
+  url.startsWith("http") ||
+  url.startsWith("https") ||
+  url.startsWith("mailto") ||
+  url.startsWith("tel");
 
 export default function Hero({
   title,
   highlight,
   description,
-  ctaText,
-  ctaLink,
+  ctaPrimaryText,
+  ctaPrimaryLink,
+  ctaSecondaryText,
+  ctaSecondaryLink,
   background,
   variant = "center",
   height = "full",
 }: HeroProps) {
+
+  const isCenter = variant === "center" || variant === "about";
+
   return (
     <section
       className={`
         relative flex items-center overflow-hidden
-        ${height === "full" ? "min-h-screen" : "h-[60vh]"}
-        ${variant === "center" ? "justify-center" : "justify-start"}
+        ${height === "full" ? "min-h-screen" : "h-[70vh]"}
+        ${isCenter ? "justify-center" : "justify-start"}
       `}
     >
+
       {/* 🖼️ BACKGROUND */}
       <Image
         src={background}
@@ -43,24 +68,21 @@ export default function Hero({
       />
 
       {/* 🌑 OVERLAY */}
-      <div className="absolute inset-0 bg-linear-to-b from-black/40 via-black/40 to-black/80" />
+      <div className="absolute inset-0 bg-black/70" />
 
       {/* ✨ GLOW */}
       <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
-        <div className="w-125 h-75 bg-accent/10 blur-[120px] rounded-full" />
+        <div className="w-96 h-96 bg-accent/10 blur-[120px] rounded-full" />
       </div>
 
-      {/* 🧠 CONTENIDO */}
+      {/* 🧠 CONTENT WRAPPER */}
       <div
         className={`
           relative z-10 w-full px-6 text-white
-          ${
-            variant === "center"
-              ? "max-w-4xl mx-auto text-center"
-              : "max-w-6xl mx-auto text-left"
-          }
+          ${isCenter ? "max-w-4xl mx-auto text-center" : "max-w-6xl mx-auto text-left"}
         `}
       >
+
         {/* 🔥 TITLE */}
         <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
           {title}
@@ -69,33 +91,98 @@ export default function Hero({
           </span>
         </h1>
 
-        {/* 💬 SUBTEXT */}
-        <p className="mt-6 text-gray-300 text-base md:text-lg leading-relaxed max-w-2xl">
+        {/* 💬 DESCRIPTION (FIX CENTRADO REAL) */}
+        <p
+          className={`
+            mt-6 text-gray-300 text-base md:text-lg leading-relaxed max-w-2xl
+            ${isCenter ? "mx-auto text-center" : ""}
+          `}
+        >
           {description}
         </p>
 
-        {/* 🚀 CTA */}
+        {/* 🚀 CTA SYSTEM */}
         <div
-          className={`mt-8 flex ${
-            variant === "center" ? "justify-center" : "justify-start"
-          }`}
+          className={`
+            mt-8 flex flex-col sm:flex-row gap-4
+            ${isCenter ? "justify-center" : "justify-start"}
+          `}
         >
-          <Link
-            href={ctaLink}
-            className="
-              px-6 py-3
-              rounded-md
-              bg-accent
-              text-black
-              font-semibold
-              text-sm md:text-base
-              hover:scale-105
-              hover:shadow-[0_0_25px_rgba(27,255,60,0.5)]
-              transition-all duration-300
-            "
-          >
-            {ctaText}
-          </Link>
+
+          {/* 🔥 PRIMARY CTA */}
+          {isExternal(ctaPrimaryLink) ? (
+            <a
+              href={ctaPrimaryLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                px-6 py-3
+                rounded-xl
+                bg-accent
+                text-black
+                font-semibold
+                hover:scale-105
+                hover:shadow-[0_0_25px_rgba(27,255,60,0.5)]
+                transition-all duration-300
+              "
+            >
+              {ctaPrimaryText}
+            </a>
+          ) : (
+            <Link
+              href={ctaPrimaryLink}
+              className="
+                px-6 py-3
+                rounded-xl
+                bg-accent
+                text-black
+                font-semibold
+                hover:scale-105
+                hover:shadow-[0_0_25px_rgba(27,255,60,0.5)]
+                transition-all duration-300
+              "
+            >
+              {ctaPrimaryText}
+            </Link>
+          )}
+
+          {/* 🔥 SECONDARY CTA */}
+          {ctaSecondaryText && ctaSecondaryLink && (
+            isExternal(ctaSecondaryLink) ? (
+              <a
+                href={ctaSecondaryLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+                  px-6 py-3
+                  rounded-xl
+                  border border-white/20
+                  text-white
+                  hover:bg-white/10
+                  transition-all duration-300
+                  backdrop-blur-sm
+                "
+              >
+                {ctaSecondaryText}
+              </a>
+            ) : (
+              <Link
+                href={ctaSecondaryLink}
+                className="
+                  px-6 py-3
+                  rounded-xl
+                  border border-white/20
+                  text-white
+                  hover:bg-white/10
+                  transition-all duration-300
+                  backdrop-blur-sm
+                "
+              >
+                {ctaSecondaryText}
+              </Link>
+            )
+          )}
+
         </div>
       </div>
     </section>
