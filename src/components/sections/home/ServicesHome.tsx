@@ -1,3 +1,4 @@
+import Section from "@/components/ui/universalSection";
 import ServiceCard from "@/components/ui/ServiceCard";
 
 /* 🧠 TIPOS */
@@ -13,6 +14,7 @@ interface Service {
   subtitle: string;
   type: ServiceType;
   active: boolean;
+  href?: string;
 }
 
 /* 📦 DATA */
@@ -22,6 +24,7 @@ const services: Service[] = [
     subtitle: "Creación de soluciones web y aplicaciones",
     type: "software",
     active: true,
+    href: "/servicios/software",
   },
   {
     title: "Educación",
@@ -52,7 +55,7 @@ const services: Service[] = [
 /* 🚀 COMPONENTE */
 export default function ServicesHome() {
   return (
-    <section className="py-20 bg-white text-[#0A2540]">
+    <Section variant="white" paddingY="md">
 
       {/* 🔹 CONTENEDOR */}
       <div className="max-w-6xl mx-auto px-6">
@@ -73,14 +76,15 @@ export default function ServicesHome() {
                 title={service.title}
                 subtitle={service.subtitle}
                 type={service.type}
-                variant="default"  
+                variant="light"
                 size="md"
+                href={service.href}
               />
             ))}
 
         </div>
 
       </div>
-    </section>
+    </Section>
   );
 }

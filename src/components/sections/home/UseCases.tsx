@@ -1,3 +1,4 @@
+import Section from "@/components/ui/universalSection";
 import ServiceCard from "@/components/ui/ServiceCard";
 import {
   Rocket,
@@ -36,7 +37,7 @@ const cases = [
 
 export default function UseCases() {
   return (
-    <section className="py-20 bg-[#0A0A0A] text-white">
+    <Section variant="dark" paddingY="md">
 
       {/* 🔹 CONTENEDOR */}
       <div className="max-w-6xl mx-auto px-6">
@@ -65,6 +66,6 @@ export default function UseCases() {
         </div>
 
       </div>
-    </section>
+    </Section>
   );
 }

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Section from "@/components/ui/universalSection";
 
 const projects = [
   {
@@ -17,7 +18,7 @@ const projects = [
 
 export default function Portfolio() {
   return (
-    <section className="section bg-white text-[#0A2540]">
+    <Section variant="white" paddingY="md">
 
       <div className="max-w-6xl mx-auto px-6">
 
@@ -66,6 +67,6 @@ export default function Portfolio() {
         </div>
 
       </div>
-    </section>
+    </Section>
   );
 }

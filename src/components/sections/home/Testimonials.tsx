@@ -1,4 +1,5 @@
 import { Quote } from "lucide-react";
+import Section from "@/components/ui/universalSection";
 
 const testimonials = [
   {
@@ -11,7 +12,7 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="section bg-white text-[#0A2540]">
+    <Section variant="white" paddingY="md">
 
       <div className="max-w-6xl mx-auto px-6">
 
@@ -56,6 +57,6 @@ export default function Testimonials() {
         </div>
 
       </div>
-    </section>
+    </Section>
   );
 }
