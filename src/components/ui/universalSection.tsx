@@ -72,7 +72,7 @@ export default function Section({
       )}
 
       {/* CONTENT */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-6">
         {children}
       </div>
 
