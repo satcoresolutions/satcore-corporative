@@ -1,5 +1,6 @@
 import Hero from "@/components/shared/Hero";
 import ServicesHome from "@/components/sections/home/ServicesHome";
+import Section from "@/components/ui/universalSection";
 import WhySatCore from "@/components/sections/home/WhySatCore";
 import UseCases from "@/components/sections/home/UseCases";
 import Portfolio from "@/components/sections/home/Portfolio";
@@ -10,18 +11,25 @@ export default function HomePage() {
   return (
     <main>
 
-      <Hero />
+      <Hero
+        title="IMPULSA TU NEGOCIO"
+        highlight="CON TECNOLOGÍA"
+        description="Software a medida que es tu propiedad intelectual..."
+        ctaText="Comienza tu transformación"
+        ctaLink="/contacto"
+        background="/img/hero/bg_2.png"
+        variant="center"
+        height="full"
+      />
       <ServicesHome />
 
       {/* BLOQUE COMBINADO */}
-      <section className="section bg-background text-foreground">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid gap-12 md:grid-cols-[1fr_2fr] items-center">
-            <WhySatCore />
-            <UseCases />
-          </div>
+      <Section variant="dark" paddingY="sm">
+        <div className="grid gap-16 md:grid-cols-[1fr_2.5fr] items-center px-0 w-full">
+          <WhySatCore />
+          <UseCases />
         </div>
-      </section>
+      </Section>
 
       {/* NUEVAS SECCIONES */}
       <Portfolio />

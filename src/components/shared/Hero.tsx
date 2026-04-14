@@ -3,21 +3,47 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Hero() {
-  return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+interface HeroProps {
+  title: string;
+  highlight: string;
+  description: string;
+  ctaText: string;
+  ctaLink: string;
+  background: string;
 
+  variant?: "center" | "left";
+  height?: "full" | "medium";
+}
+
+export default function Hero({
+  title,
+  highlight,
+  description,
+  ctaText,
+  ctaLink,
+  background,
+  variant = "center",
+  height = "full",
+}: HeroProps) {
+  return (
+    <section
+      className={`
+        relative flex items-center overflow-hidden
+        ${height === "full" ? "min-h-screen" : "h-[60vh]"}
+        ${variant === "center" ? "justify-center" : "justify-start"}
+      `}
+    >
       {/* 🖼️ BACKGROUND */}
       <Image
-        src="/img/hero/bg_2.png"
-        alt="SatCore Hero Background"
+        src={background}
+        alt="Hero Background"
         fill
         priority
         className="object-cover object-center opacity-40"
       />
 
       {/* 🌑 OVERLAY */}
-      <div className="absolute inset-0 bg-linear-to-b from-black/40 via-black/40 to-black/70" />
+      <div className="absolute inset-0 bg-linear-to-b from-black/40 via-black/40 to-black/80" />
 
       {/* ✨ GLOW */}
       <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
@@ -25,25 +51,37 @@ export default function Hero() {
       </div>
 
       {/* 🧠 CONTENIDO */}
-      <div className="relative z-10 max-w-4xl text-center px-6 text-white">
-
+      <div
+        className={`
+          relative z-10 w-full px-6 text-white
+          ${
+            variant === "center"
+              ? "max-w-4xl mx-auto text-center"
+              : "max-w-6xl mx-auto text-left"
+          }
+        `}
+      >
         {/* 🔥 TITLE */}
         <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
-          IMPULSA TU NEGOCIO
+          {title}
           <span className="block text-accent mt-2">
-            CON TECNOLOGÍA
+            {highlight}
           </span>
         </h1>
 
         {/* 💬 SUBTEXT */}
-        <p className="mt-6 text-gray-300 text-base md:text-lg leading-relaxed">
-          Software a medida que es tu propiedad intelectual, no una plantilla. IA que automatiza tu estrategia única. Ciberseguridad que anticipa. No somos para todos, somos para quienes deciden liderar. Descubre si SatCore es para ti.
+        <p className="mt-6 text-gray-300 text-base md:text-lg leading-relaxed max-w-2xl">
+          {description}
         </p>
 
         {/* 🚀 CTA */}
-        <div className="mt-8 flex justify-center">
+        <div
+          className={`mt-8 flex ${
+            variant === "center" ? "justify-center" : "justify-start"
+          }`}
+        >
           <Link
-            href="/contacto"
+            href={ctaLink}
             className="
               px-6 py-3
               rounded-md
@@ -56,10 +94,9 @@ export default function Hero() {
               transition-all duration-300
             "
           >
-            Comienza tu transformación
+            {ctaText}
           </Link>
         </div>
-
       </div>
     </section>
   );
