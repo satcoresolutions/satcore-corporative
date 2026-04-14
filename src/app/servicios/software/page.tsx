@@ -27,7 +27,6 @@ export default function SoftwarePage() {
             {/* 🧭 4. PROCESO (CÓMO TRABAJAMOS) */}
             <SoftwareProcess />
 
-
             {/* 🔐 6. CONFIANZA TÉCNICA */}
             <SoftwareSecurity />
 
