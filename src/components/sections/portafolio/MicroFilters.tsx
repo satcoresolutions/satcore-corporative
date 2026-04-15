@@ -8,11 +8,11 @@ interface Props {
   macro: MacroFilter;
 }
 
-/* 🧠 MAPEO INTELIGENTE */
+/* 🧠 MAPEO */
 const servicesByMacro: Record<MacroFilter, MicroFilter[]> = {
-  Todos: ["Todos", ...PROJECT_SERVICES],
+  Todos: ["Todos"],
   software: ["Todos", ...PROJECT_SERVICES],
-  ciberseguridad: ["Todos"], // luego puedes meter pentesting, etc
+  ciberseguridad: ["Todos"],
   ia: ["Todos"],
   branding: ["Todos"],
   educacion: ["Todos"],
@@ -29,10 +29,14 @@ const labels: Record<MicroFilter, string> = {
 };
 
 export default function MicroFilters({ active, onChange, macro }: Props) {
+  
+  /* 🚫 NO MOSTRAR SI NO HAY MACRO */
+  if (macro === "Todos") return null;
+
   const filters = servicesByMacro[macro] || ["Todos"];
 
   return (
-    <div className="flex gap-3 flex-wrap mt-4">
+    <div className="flex gap-3 flex-wrap mt-4 animate-fade-in">
       {filters.map((filter) => (
         <button
           key={filter}
