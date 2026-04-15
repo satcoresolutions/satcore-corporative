@@ -15,7 +15,7 @@ export interface ServiceLevel {
 }
 
 export interface ServiceCategory {
-  id: string; // 👈 SKU categoría
+  id: string; 
   category: string;
   subtitle: string;
   icon: LucideIcon;
