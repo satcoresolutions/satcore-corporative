@@ -1,0 +1,58 @@
+import { Project } from "@/types/project";
+
+export const projects: Project[] = [
+  {
+    id: 1,
+    title: "Landing Inmobiliaria",
+    description: "Sitio web para captación de clientes inmobiliarios.",
+    category: "software",
+    service: "landing",
+    image: "/img/projects/landing_page_1.jpg",
+    href: "https://erick28hdz.github.io/Inmobiliaria-EleganciaHabitat/",
+  },
+  {
+    id: 2,
+    title: "Landing Agencia de Viajes",
+    description: "Promoción de destinos turísticos.",
+    category: "software",
+    service: "landing",
+    image: "/img/projects/landing_page_2.png",
+    href: "https://erick28hdz.github.io/PaginaRumbo/",
+  },
+  {
+    id: 3,
+    title: "Web Corporativa",
+    description: "Sitio institucional profesional.",
+    category: "software",
+    service: "corporativa",
+    image: "/img/projects/Page_corporative_1.png",
+    href: "https://erick-sat.vercel.app/",
+  },
+  {
+    id: 4,
+    title: "Portafolio Profesional",
+    description: "Presentación de servicios.",
+    category: "software",
+    service: "corporativa",
+    image: "/img/projects/Portafolio_1.png",
+    href: "https://erick28hdz.github.io/PortafolioWeb/",
+  },
+  {
+    id: 5,
+    title: "Portafolio Dev",
+    description: "Marca personal técnica.",
+    category: "software",
+    service: "corporativa",
+    image: "/img/projects/portafolio_2.png",
+    href: "https://portafolio-erickhdz.vercel.app/",
+  },
+  {
+    id: 6,
+    title: "Generador de Contraseñas",
+    description: "Herramienta de seguridad.",
+    category: "ciberseguridad",
+    service: "custom",
+    image: "/img/projects/Generador_contraseñas.png",
+    href: "https://generador-contrasenas-pro.onrender.com/",
+  },
+];

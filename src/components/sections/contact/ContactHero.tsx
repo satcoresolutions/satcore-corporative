@@ -16,7 +16,7 @@ export default function ContactHero() {
 
       background="/img/hero/bg_1.png"
       variant="contact"
-      
+      height="medium"
     />
   );
 }
