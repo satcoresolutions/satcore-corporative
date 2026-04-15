@@ -54,11 +54,14 @@ export default function Modal({
             {/* MODAL */}
             <div className="
                 relative z-10 w-full max-w-5xl
-                rounded-xl
-                bg-(--color-bg-light)
-                shadow-[0_20px_60px_rgba(0,0,0,0.4)]
-                border border-(--color-border)
-                overflow-hidden
+
+    max-h-[90vh] md:max-h-[85vh]
+    overflow-y-auto
+
+    rounded-xl
+    bg-(--color-bg-light)
+    shadow-[0_20px_60px_rgba(0,0,0,0.4)]
+    border border-(--color-border)
             ">
 
                 {/* HEADER */}

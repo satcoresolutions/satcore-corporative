@@ -59,7 +59,7 @@ export default function BrandLogo({
       alt="SatCore Solutions"
       width={width || size.width}
       height={height || size.height}
-      className={className}
+      className={`object-contain ${className || ""}`}
       priority={usage === "hero"}
     />
   );
