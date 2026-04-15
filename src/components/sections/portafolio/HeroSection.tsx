@@ -14,7 +14,7 @@ export default function HeroSection() {
       ctaSecondaryLink="#portafolio"
       background="/img/hero/bg_1.png"
       variant="projects"
-      height="medium"
+      height="full"
     />
   );
 }
