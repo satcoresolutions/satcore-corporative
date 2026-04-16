@@ -16,6 +16,7 @@ export default function CalendarCard() {
       </p>
 
       <button
+        id="cta-calendar-main"
         onClick={() => window.open(GOOGLE_CALENDAR_LINK, "_blank")}
         className="btn-primary w-full"
       >

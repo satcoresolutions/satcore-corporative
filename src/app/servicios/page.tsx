@@ -13,17 +13,22 @@ export default function ServiciosPage() {
         title="SOLUCIONES TECNOLÓGICAS"
         highlight="INTEGRALES"
         description="Desde desarrollo de software hasta inteligencia artificial y ciberseguridad, creamos soluciones escalables y seguras."
-        
+
         ctaPrimaryText="Ver servicios"
         ctaPrimaryLink="#servicios"
+        ctaPrimaryType="scroll_services"       // 🔥 exploración de oferta
 
         ctaSecondaryText="Hablemos"
         ctaSecondaryLink="https://wa.me/573022016072"
+        ctaSecondaryType="whatsapp"            // 🔥 contacto directo
+
+        section="services"                     // 🔥 contexto comercial
 
         background="/img/hero/bg_3.png"
         variant="services"
         height="full"
       />
+
 
       {/* 📦 SECCIONES */}
       <ServicesSection />
