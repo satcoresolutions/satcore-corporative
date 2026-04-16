@@ -1,4 +1,4 @@
-import type { DataLayerEvent } from "@/types/analytics";
+import type { DataLayerEvent } from "@/types/dataLayer";
 
 export {};
 

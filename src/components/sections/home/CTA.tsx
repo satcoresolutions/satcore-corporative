@@ -9,20 +9,20 @@ export default function HomeCTA() {
       title="Impulsa tu negocio con"
       highlight="tecnología que genera resultados"
 
-      description="
-        En SatCore desarrollamos soluciones digitales a medida: software,
-        automatización con IA, ciberseguridad y experiencias digitales que
-        optimizan procesos y aceleran el crecimiento de tu empresa.
-      "
+      description="En SatCore desarrollamos soluciones digitales a medida: software, automatización con IA, ciberseguridad y experiencias digitales que optimizan procesos y aceleran el crecimiento de tu empresa."
 
+      /* 🔥 PRIMARY */
       primaryText="Hablar con un experto"
       primaryLink="https://wa.me/573022016072?text=Hola,%20quiero%20impulsar%20mi%20negocio%20con%20tecnología"
+      ctaPrimaryType="whatsapp"
 
+      /* 🔥 SECONDARY */
       secondaryText="Agendar reunión"
       secondaryLink={GOOGLE_CALENDAR_LINK}
+      ctaSecondaryType="calendar"
 
-      tertiaryText=""
-      tertiaryLink=""
+      /* 🧠 TRACKING */
+      section="home_cta"
     />
   );
 }
