@@ -1,36 +1,204 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<p align="center">
+  <img src="/public/logo.png" width="120" alt="SatCore Solutions Logo" />
+</p>
 
-## Getting Started
+<h1 align="center">🚀 SatCore Solutions</h1>
 
-First, run the development server:
+<p align="center">
+  Plataforma web corporativa enfocada en desarrollo, ciberseguridad, automatización e IA.
+</p>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-16-black" />
+  <img src="https://img.shields.io/badge/React-19-blue" />
+  <img src="https://img.shields.io/badge/Status-Active-success" />
+  <img src="https://img.shields.io/badge/Performance-90%2B-brightgreen" />
+</p>
+
+---
+
+## 🧠 Sobre el Proyecto
+
+**SatCore Solutions** es una plataforma web moderna diseñada para posicionar una marca tecnológica premium, enfocada en:
+
+- Desarrollo de software a medida
+- Ciberseguridad
+- Automatización de procesos
+- Integración de inteligencia artificial
+
+---
+
+## 🎯 Objetivos
+
+- 🔥 Generar leads de alto valor
+- ⚡ Ofrecer experiencia rápida y fluida
+- 🧱 Construir una arquitectura escalable
+- 🤖 Preparar integración con IA y automatización
+
+---
+
+## 🖼️ Screenshots
+
+### 🏠 Home
+
+![Home](./public/screenshots/home.png)
+
+### 📄 FAQ (Sistema dinámico)
+
+![FAQ](./public/screenshots/faq.png)
+
+### 🔐 Privacy & Terms (Legal UI)
+
+![Legal](./public/screenshots/privacy.png)
+
+> ⚠️ Nota: Agrega tus screenshots en `/public/screenshots/`
+
+---
+
+## ⚙️ Stack Tecnológico
+
+| Tecnología      | Uso                 |
+| --------------- | ------------------- |
+| Next.js 16      | Framework principal |
+| React 19        | UI                  |
+| TypeScript      | Tipado              |
+| Tailwind CSS v4 | Estilos             |
+| Framer Motion   | Animaciones         |
+| Lucide Icons    | Iconografía         |
+| Resend          | Email               |
+
+---
+
+## 🧱 Arquitectura
+
+```
+/app
+/components
+  /ui
+  /sections
+  /shared
+/data
+/public
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+✔ Component-based  
+✔ Data-driven  
+✔ Escalable
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Instalación
 
-## Learn More
+```bash
+git clone <repo>
+cd site_corporative
+npm install
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Abrir en:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+http://localhost:3000
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📈 Métricas de Calidad
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| KPI              | Objetivo          |
+| ---------------- | ----------------- |
+| 🚀 Performance   | > 90 Lighthouse   |
+| ⏱ LCP            | < 2.5s            |
+| 📱 Responsive    | 100% Mobile-first |
+| 🔒 Seguridad     | Headers + HTTPS   |
+| ♿ Accesibilidad | WCAG 2.1          |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🎨 Sistema de Diseño
+
+### Colores
+
+- Azul: `#132A8E`
+- Verde: `#1BFF3C`
+- Negro: `#0A0A0A`
+- Gris: `#F6F9FC`
+
+### Regla
+
+- 70% neutros
+- 20% azul
+- 10% verde (CTA)
+
+---
+
+## 🧠 Características Clave
+
+- 🔥 UI moderna basada en componentes
+- ⚡ Carga rápida optimizada
+- 📊 Contenido dinámico (FAQ, Terms, Privacy)
+- 🧩 Arquitectura modular
+- 📱 Totalmente responsive
+- 🔐 Enfoque en seguridad
+
+---
+
+## 🗺️ Roadmap
+
+### ✅ Fase 1 (Completado)
+
+- Landing page
+- Sistema de secciones modular
+- FAQ dinámico con data
+- Pages legales (Terms / Privacy)
+
+### 🚧 Fase 2 (En progreso)
+
+- Integración de backend (API)
+- Formulario con Resend
+- Analytics y tracking
+
+### 🔮 Fase 3 (Futuro)
+
+- Dashboard cliente
+- Integración con IA
+- Automatización de procesos
+- CMS interno
+
+---
+
+## 🌐 Deploy
+
+Recomendado:
+
+👉 Vercel
+
+```bash
+npm run build
+```
+
+---
+
+## 📞 Contacto
+
+- 📧 satcoresolutions@gmail.com
+- 📱 +57 302 201 6072
+
+---
+
+## 📄 Licencia
+
+© SatCore Solutions — Todos los derechos reservados.
+
+---
+
+## ⭐ Contribución
+
+Actualmente este proyecto es privado y gestionado por SatCore Solutions.
+
+---
+
+<p align="center">
+  Hecho con 💚 por SatCore Solutions
+</p>
