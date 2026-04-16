@@ -10,9 +10,13 @@ export default function AboutHero() {
 
       ctaPrimaryText="Hablar ahora"
       ctaPrimaryLink="https://wa.me/573022016072"
+      ctaPrimaryType="whatsapp"                // 🔥 contacto directo
 
       ctaSecondaryText="Ver servicios"
       ctaSecondaryLink="/servicios"
+      ctaSecondaryType="navigation_services"  // 🔥 exploración comercial
+
+      section="about"                          // 🔥 contexto de branding
 
       background="/img/hero/bg_3.png"
       variant="center"

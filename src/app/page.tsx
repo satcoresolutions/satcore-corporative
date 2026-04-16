@@ -19,9 +19,13 @@ export default function HomePage() {
 
         ctaPrimaryText="Comienza tu transformación"
         ctaPrimaryLink="/contacto"
+        ctaPrimaryType="navigation_contact"     // 🔥 intención: lead
 
         ctaSecondaryText="Hablar por WhatsApp"
         ctaSecondaryLink="https://wa.me/573022016072"
+        ctaSecondaryType="whatsapp"             // 🔥 contacto inmediato
+
+        section="home"                          // 🔥 contexto principal
 
         background="/img/hero/bg_2.png"
         variant="center"

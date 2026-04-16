@@ -22,6 +22,10 @@ interface HeroProps {
   ctaSecondaryText?: string;
   ctaSecondaryLink?: string;
 
+  ctaPrimaryType?: string;
+  ctaSecondaryType?: string;
+  section?: string;
+
   background: string;
   variant?: HeroVariant;
   height?: "full" | "medium";
@@ -42,12 +46,29 @@ export default function Hero({
   ctaPrimaryLink,
   ctaSecondaryText,
   ctaSecondaryLink,
+  ctaPrimaryType = "primary",
+  ctaSecondaryType = "secondary",
+  section = "unknown",
   background,
   variant = "center",
   height = "full",
 }: HeroProps) {
 
   const isCenter = variant === "center" || variant === "about";
+
+  const trackCTA = (type: string, label: string) => {
+    if (typeof window === "undefined") return;
+
+    window.dataLayer = window.dataLayer || [];
+
+    window.dataLayer.push({
+      event: "hero_cta_click",
+      cta_type: type,
+      cta_label: label,
+      section: section,
+      page_path: window.location.pathname,
+    });
+  };
 
   return (
     <section
@@ -115,6 +136,7 @@ export default function Hero({
               href={ctaPrimaryLink}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackCTA(ctaPrimaryType, ctaPrimaryText)}
               className="
                 px-6 py-3
                 rounded-xl
@@ -131,6 +153,7 @@ export default function Hero({
           ) : (
             <Link
               href={ctaPrimaryLink}
+              onClick={() => trackCTA(ctaPrimaryType, ctaPrimaryText)}
               className="
                 px-6 py-3
                 rounded-xl
@@ -153,6 +176,7 @@ export default function Hero({
                 href={ctaSecondaryLink}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackCTA(ctaSecondaryType, ctaSecondaryText)}
                 className="
                   px-6 py-3
                   rounded-xl
@@ -168,6 +192,7 @@ export default function Hero({
             ) : (
               <Link
                 href={ctaSecondaryLink}
+                onClick={() => trackCTA(ctaSecondaryType, ctaSecondaryText)}
                 className="
                   px-6 py-3
                   rounded-xl

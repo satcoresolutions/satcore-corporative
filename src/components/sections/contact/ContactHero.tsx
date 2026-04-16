@@ -10,9 +10,13 @@ export default function ContactHero() {
 
       ctaPrimaryText="Hablar ahora"
       ctaPrimaryLink="https://wa.me/573022016072"
+      ctaPrimaryType="whatsapp"          // 🔥 CLAVE
 
       ctaSecondaryText="Enviar mensaje"
       ctaSecondaryLink="#formulario"
+      ctaSecondaryType="form"            // 🔥 CLAVE
+
+      section="contact"                  // 🔥 CLAVE
 
       background="/img/hero/bg_1.png"
       variant="contact"
