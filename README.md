@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="/public/logo.png" width="120" alt="SatCore Solutions Logo" />
+  <img src="/public/logos/01_Logo_Principal.png" width="120" alt="SatCore Solutions Logo" />
 </p>
 
 <h1 align="center">🚀 SatCore Solutions</h1>
