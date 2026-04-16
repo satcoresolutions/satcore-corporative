@@ -27,10 +27,17 @@ declare global {
     page_path: string;
   }
 
+  interface SocialClickEvent extends BaseEvent {
+    event: "social_click";
+    social_platform: string;
+    page_path: string;
+  }
+
   type DataLayerEvent =
     | HeroCTAEvent
     | CTAEvent
     | GenerateLeadEvent
+    | SocialClickEvent
     | BaseEvent;
 
   interface Window {
@@ -38,4 +45,4 @@ declare global {
   }
 }
 
-export {};
+export { };
