@@ -1,11 +1,53 @@
+"use client";
+
 import ServiceCard from "@/components/ui/ServiceCard";
 import { ShieldCheck, Wrench } from "lucide-react";
 import Section from "@/components/ui/universalSection";
+import { motion, Variants } from "framer-motion";
+
+/* 🎬 ANIMACIONES */
+const container: Variants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const leftItem: Variants = {
+  hidden: {
+    opacity: 0,
+    x: -60,
+  },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const rightItem: Variants = {
+  hidden: {
+    opacity: 0,
+    x: 60,
+  },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
 
 export default function SoftwareGuarantee() {
   return (
     <Section variant="blue" paddingY="md">
-
       <div className="max-w-6xl mx-auto px-6">
 
         {/* 🔥 TITLE */}
@@ -19,30 +61,40 @@ export default function SoftwareGuarantee() {
           </p>
         </div>
 
-        {/* 🧩 GRID */}
-        <div className="grid md:grid-cols-2 gap-10">
+        {/* 🧩 GRID ANIMADO */}
+        <motion.div
+          className="grid md:grid-cols-2 gap-10"
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+        >
 
           {/* 🛡️ WARRANTY */}
-          <ServiceCard
-            title="Garantía (30 días)"
-            subtitle="Incluye corrección de bugs y ajustes menores posteriores a la entrega. No cubre nuevas funcionalidades ni cambios de alcance."
-            icon={ShieldCheck}
-            variant="minimal"
-            size="lg"
-            iconVariant="circleGreen"
-          />
+          <motion.div variants={leftItem}>
+            <ServiceCard
+              title="Garantía (30 días)"
+              subtitle="Incluye corrección de bugs y ajustes menores posteriores a la entrega. No cubre nuevas funcionalidades ni cambios de alcance."
+              icon={ShieldCheck}
+              variant="minimal"
+              size="lg"
+              iconVariant="circleGreen"
+            />
+          </motion.div>
 
           {/* 🔧 MAINTENANCE */}
-          <ServiceCard
-            title="Plan de mantenimiento"
-            subtitle="Actualizaciones de seguridad, backups automáticos, soporte técnico y mejoras continuas según plan."
-            icon={Wrench}
-            variant="minimal"
-            size="lg"
-            iconVariant="circleBlue"
-          />
+          <motion.div variants={rightItem}>
+            <ServiceCard
+              title="Plan de mantenimiento"
+              subtitle="Actualizaciones de seguridad, backups automáticos, soporte técnico y mejoras continuas según plan."
+              icon={Wrench}
+              variant="minimal"
+              size="lg"
+              iconVariant="circleBlue"
+            />
+          </motion.div>
 
-        </div>
+        </motion.div>
 
       </div>
     </Section>

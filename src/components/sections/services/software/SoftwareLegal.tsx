@@ -1,4 +1,32 @@
+"use client";
+
 import Section from "@/components/ui/universalSection";
+import { motion, Variants } from "framer-motion";
+
+/* 🎬 ANIMACIONES */
+const container: Variants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
+};
+
+const item: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 20,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
 
 export default function SoftwareLegal() {
   const items = [
@@ -28,9 +56,15 @@ export default function SoftwareLegal() {
     <Section variant="dark" paddingY="md">
 
       {/* TITLE */}
-      <h2 className="text-3xl md:text-5xl font-bold text-center mb-16">
+      <motion.h2
+        className="text-3xl md:text-5xl font-bold text-center mb-16"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        viewport={{ once: true }}
+      >
         Propiedad intelectual y licencias
-      </h2>
+      </motion.h2>
 
       {/* HEADER ROW */}
       <div className="hidden md:grid grid-cols-3 gap-4 text-sm text-white/60 mb-4 px-4">
@@ -39,12 +73,19 @@ export default function SoftwareLegal() {
         <span>Licencia</span>
       </div>
 
-      {/* CARDS */}
-      <div className="space-y-4">
-
-        {items.map((item, i) => (
-          <div
+      {/* CARDS ANIMADAS */}
+      <motion.div
+        className="space-y-4"
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-60px" }}
+      >
+        {items.map((itemData, i) => (
+          <motion.div
             key={i}
+            variants={item}
+            whileHover={{ scale: 1.01, y: -2 }}
             className="
               grid md:grid-cols-3 gap-4
               p-5 rounded-xl
@@ -54,23 +95,20 @@ export default function SoftwareLegal() {
               transition
             "
           >
-
             <div className="font-medium text-white">
-              {item.element}
+              {itemData.element}
             </div>
 
             <div className="text-sm text-white/70">
-              {item.owner}
+              {itemData.owner}
             </div>
 
             <div className="text-sm text-accent">
-              {item.license}
+              {itemData.license}
             </div>
-
-          </div>
+          </motion.div>
         ))}
-
-      </div>
+      </motion.div>
 
     </Section>
   );

@@ -2,7 +2,7 @@
 
 import Section from "@/components/ui/universalSection";
 import ServiceCard from "@/components/ui/ServiceCard";
-import ServiceIcon from "@/components/ui/ServiceIcon";
+import { motion, Variants } from "framer-motion";
 
 /* 🧠 TIPOS */
 type ServiceType =
@@ -53,7 +53,41 @@ const pilares: Pilar[] = [
   },
 ];
 
-/* 🚀 COMPONENTE */
+/* 🎬 ANIMACIONES */
+
+const headerVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const containerVariants: Variants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.45,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
 export default function Pilares() {
   return (
     <Section variant="white" paddingY="md">
@@ -61,35 +95,51 @@ export default function Pilares() {
       <div className="max-w-6xl mx-auto px-6">
 
         {/* 🔥 TITLE */}
-        <div className="text-center mb-12">
+        <motion.div
+          className="text-center mb-12"
+          variants={headerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
           <h2 className="text-3xl md:text-4xl font-bold">
             Nuestros Pilares
           </h2>
+
           <p className="text-muted text-sm mt-2 max-w-md mx-auto">
             Construimos soluciones tecnológicas completas a través de un
             ecosistema de servicios especializados.
           </p>
-        </div>
+        </motion.div>
 
         {/* 🧩 GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
           {pilares
-            .filter((pilar) => pilar.active)
-            .map((pilar, index) => (
-              <ServiceCard
+            .filter((pilar: Pilar) => pilar.active) // ✅ TIPADO AQUÍ
+            .map((pilar: Pilar, index: number) => ( // ✅ Y AQUÍ
+              <motion.div
                 key={index}
-                title={pilar.title}
-                subtitle={pilar.subtitle}
-                type={pilar.type}
-                variant="light"
-                size="md"
+                variants={cardVariants}
                 className="h-full"
+                whileHover={{ y: -4 }} // micro interacción
               >
-              </ServiceCard>
+                <ServiceCard
+                  title={pilar.title}
+                  subtitle={pilar.subtitle}
+                  type={pilar.type}
+                  variant="light"
+                  size="md"
+                  className="h-full"
+                />
+              </motion.div>
             ))}
-
-        </div>
+        </motion.div>
 
       </div>
     </Section>
