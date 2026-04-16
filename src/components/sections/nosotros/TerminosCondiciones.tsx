@@ -1,3 +1,5 @@
+"use client";
+
 import ServiceCard from "@/components/ui/ServiceCard";
 import Section from "@/components/ui/universalSection";
 import {
@@ -12,6 +14,7 @@ import {
   Workflow,
   LucideIcon,
 } from "lucide-react";
+import { motion, Variants } from "framer-motion";
 
 /* 🧠 TYPES */
 type TermItem = {
@@ -78,14 +81,47 @@ const termsData: TermItem[] = [
   },
 ];
 
-/* 🚀 COMPONENT */
+/* 🎬 ANIMACIONES */
+
+// contenedor (stagger)
+const container: Variants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+// items (entrada lateral alternada)
+const item: Variants = {
+  hidden: (i: number) => ({
+    opacity: 0,
+    x: i % 2 === 0 ? -30 : 30, // izquierda / derecha
+  }),
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
 export default function TerminosCondiciones() {
   return (
     <Section variant="dark" paddingY="md">
       <div className="container space-y-10">
 
         {/* HEADER */}
-        <div className="text-center space-y-3">
+        <motion.div
+          className="text-center space-y-3"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
           <h2 className="text-3xl font-bold">
             Términos y Condiciones
           </h2>
@@ -94,23 +130,34 @@ export default function TerminosCondiciones() {
             Condiciones claras, transparentes y estructuradas para garantizar
             confianza y profesionalismo en cada proyecto.
           </p>
-        </div>
+        </motion.div>
 
-        {/* GRID DINÁMICO */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {termsData.map((item, index) => (
-            <ServiceCard
+        {/* GRID */}
+        <motion.div
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
+          {termsData.map((itemData, index) => (
+            <motion.div
               key={index}
-              title={item.title}
-              icon={item.icon}
-              iconVariant="circleBlue"
-              variant="minimal"
-              size="md"
+              variants={item}
+              custom={index}
             >
-              {item.content}
-            </ServiceCard>
+              <ServiceCard
+                title={itemData.title}
+                icon={itemData.icon}
+                iconVariant="circleBlue"
+                variant="minimal"
+                size="md"
+              >
+                {itemData.content}
+              </ServiceCard>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
       </div>
     </Section>

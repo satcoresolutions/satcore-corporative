@@ -1,3 +1,5 @@
+"use client";
+
 import ServiceCard from "@/components/ui/ServiceCard";
 import Section from "@/components/ui/universalSection";
 import {
@@ -8,6 +10,7 @@ import {
   BarChart3,
   LucideIcon,
 } from "lucide-react";
+import { motion, Variants } from "framer-motion";
 
 /* 🧠 TYPES */
 type ValueItem = {
@@ -50,14 +53,46 @@ const valueData: ValueItem[] = [
   },
 ];
 
-/* 🚀 COMPONENT */
+/* 🎬 ANIMACIONES */
+
+// contenedor (stagger elegante)
+const container: Variants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+// items (entrada lateral alternada PRO)
+const item: Variants = {
+  hidden: (i: number) => ({
+    opacity: 0,
+    x: i % 2 === 0 ? -40 : 40, // alterna izquierda/derecha
+  }),
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.55,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
 export default function PropuestaValor() {
   return (
     <Section variant="blue" paddingY="md">
       <div className="container space-y-10">
 
         {/* HEADER */}
-        <div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
           <h2 className="text-3xl font-bold">
             Propuesta de Valor
           </h2>
@@ -67,23 +102,35 @@ export default function PropuestaValor() {
             accesibles y funcionales, mientras enseñamos a nuestros clientes
             a utilizarlas para crecer y escalar.”
           </p>
-        </div>
+        </motion.div>
 
-        {/* GRID 5 COLUMNAS */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-          {valueData.map((item, index) => (
-            <ServiceCard
+        {/* GRID */}
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6"
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
+          {valueData.map((itemData, index) => (
+            <motion.div
               key={index}
-              title={item.title}
-              icon={item.icon}
-              iconVariant="circleGreen"
-              variant="info"
-              size="sm"
+              variants={item}
+              custom={index} // 🔥 necesario para alternar lados
             >
-              {item.content}
-            </ServiceCard>
+              <ServiceCard
+                title={itemData.title}
+                icon={itemData.icon}
+                iconVariant="circleGreen"
+                variant="info"
+                size="sm"
+                className="h-full"
+              >
+                {itemData.content}
+              </ServiceCard>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
       </div>
     </Section>

@@ -1,10 +1,13 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { Globe, Layout, AppWindow, Shield, LucideIcon } from "lucide-react";
 import { Project, ProjectService } from "@/types/project";
 import { pushEvent } from "@/lib/analytics";
+import { motion } from "framer-motion";
 
-/* 🧠 CONFIG TIPADA CORRECTAMENTE */
+/* 🧠 CONFIG */
 const serviceConfig: Record<
   ProjectService,
   { icon: LucideIcon; label: string }
@@ -39,7 +42,6 @@ export default function ProjectCard({ project }: { project: Project }) {
           page_path: window.location.pathname,
         });
 
-        // 🔥 pequeña pausa para asegurar envío
         setTimeout(() => {
           window.open(project.href, "_blank");
         }, 150);
@@ -47,29 +49,55 @@ export default function ProjectCard({ project }: { project: Project }) {
         e.preventDefault();
       }}
     >
-      <div className="group relative rounded-xl overflow-hidden cursor-pointer border border-white/10">
+      <motion.div
+        className="group relative rounded-xl overflow-hidden cursor-pointer border border-white/10 h-full"
+        
+        /* 🎬 ENTRADA */
+        initial={{ opacity: 0, y: 25 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        viewport={{ once: true }}
+
+        /* 🖱️ HOVER */
+        whileHover={{ y: -6 }}
+      >
 
         {/* IMAGE */}
-        <Image
-          src={project.image}
-          alt={project.title}
-          width={500}
-          height={300}
-          className="object-cover w-full h-56 group-hover:scale-105 transition duration-500"
-        />
+        <motion.div
+          className="overflow-hidden"
+        >
+          <Image
+            src={project.image}
+            alt={project.title}
+            width={500}
+            height={300}
+            className="object-cover w-full h-56 transition duration-500 group-hover:scale-110"
+          />
+        </motion.div>
 
         {/* OVERLAY */}
-        <div className="absolute inset-0 bg-linear-to-t from-black via-black/70 to-transparent opacity-80 group-hover:opacity-100 transition" />
+        <motion.div
+          className="absolute inset-0 bg-linear-to-t from-black via-black/70 to-transparent"
+          initial={{ opacity: 0.8 }}
+          whileHover={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        />
 
         {/* CONTENT */}
         <div className="absolute inset-0 flex flex-col justify-end p-5">
 
           {/* BADGE */}
           {config && Icon && (
-            <div className="inline-flex items-center gap-2 text-xs font-medium text-accent mb-2">
+            <motion.div
+              className="inline-flex items-center gap-2 text-xs font-medium text-accent mb-2"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              viewport={{ once: true }}
+            >
               <Icon size={14} />
               <span>{config.label}</span>
-            </div>
+            </motion.div>
           )}
 
           {/* TITLE */}
@@ -78,14 +106,26 @@ export default function ProjectCard({ project }: { project: Project }) {
           </h3>
 
           {/* DESCRIPTION */}
-          <p className="text-gray-300 text-sm mt-1 opacity-0 group-hover:opacity-100 transition duration-300">
+          <motion.p
+            className="text-gray-300 text-sm mt-1"
+            initial={{ opacity: 0, y: 10 }}
+            whileHover={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+          >
             {project.description}
-          </p>
+          </motion.p>
         </div>
 
         {/* BORDER HOVER */}
-        <div className="absolute inset-0 border border-transparent group-hover:border-accent/40 rounded-xl transition" />
-      </div>
+        <motion.div
+          className="absolute inset-0 border border-transparent rounded-xl"
+          whileHover={{
+            borderColor: "rgba(0,255,150,0.4)",
+          }}
+          transition={{ duration: 0.3 }}
+        />
+
+      </motion.div>
     </Link>
   );
 }
