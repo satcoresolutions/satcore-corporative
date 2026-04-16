@@ -22,8 +22,26 @@ export const metadata: Metadata = {
     template: "%s | SatCore Solutions",
   },
   description:
-    "Desarrollo web de alto impacto. Automatiza, optimiza y escala tu negocio con tecnología.",
+    "Desarrollo web de alto impacto para empresas. Automatiza procesos, optimiza tu operación y escala tu negocio con soluciones tecnológicas a medida.",
+  keywords: [
+    "desarrollo web",
+    "software a medida",
+    "automatización empresarial",
+    "desarrollo en Colombia",
+    "IA para negocios",
+    "ciberseguridad",
+  ],
+  authors: [{ name: "SatCore Solutions" }],
+  creator: "SatCore Solutions",
+  publisher: "SatCore Solutions",
   metadataBase: new URL("https://satcore.solutions"),
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
     title: "SatCore Solutions",
     description: "El núcleo tecnológico que impulsa tu negocio.",
@@ -42,7 +60,7 @@ import Footer from "@/components/layout/Footer";
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 
 /* 🏗️ LAYOUT */
-export default async function RootLayout({ 
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
