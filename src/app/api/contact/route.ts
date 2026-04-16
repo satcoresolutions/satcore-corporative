@@ -23,8 +23,9 @@ export async function POST(req: Request) {
 
     const { name, email, message } = result.data;
 
-    await resend.emails.send({
-      from: "SatCore <onboarding@resend.dev>",
+    /* 📧 ENVÍO EMAIL */
+    const emailResponse = await resend.emails.send({
+      from: "SatCore <onboarding@resend.dev>", // ⚠️ luego dominio propio
       to: ["satcoresolutions@gmail.com"],
       subject: "Nuevo mensaje desde tu web 🚀",
       html: `
@@ -34,6 +35,8 @@ export async function POST(req: Request) {
         <p><strong>Mensaje:</strong> ${message}</p>
       `,
     });
+
+    console.log("RESEND RESPONSE:", emailResponse);
 
     return Response.json({ success: true });
 

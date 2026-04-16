@@ -3,63 +3,57 @@
 import { useState } from "react";
 import { ZodSchema } from "zod";
 
-/* 🧠 TYPES */
-type FormData = Record<string, string>;
-
-interface Field {
-  name: string;
+/* 🧠 GENERIC TYPE */
+interface Field<T> {
+  name: keyof T;
   label: string;
   type?: "text" | "email" | "password" | "textarea";
   placeholder?: string;
   required?: boolean;
 }
 
-interface UniversalFormProps {
+interface UniversalFormProps<T> {
   title?: string;
   description?: string;
-  fields: Field[];
-  schema: ZodSchema<FormData>;
-  onSubmit: (data: FormData) => void;
+  fields: Field<T>[];
+  schema: ZodSchema<T>;
+  onSubmit: (data: T) => void | Promise<void>;
   submitText?: string;
 }
 
-export default function UniversalForm({
+export default function UniversalForm<T extends Record<string, unknown>>({
   title,
   description,
   fields,
   schema,
   onSubmit,
   submitText = "Enviar",
-}: UniversalFormProps) {
-  const [formData, setFormData] = useState<FormData>({});
-  const [errors, setErrors] = useState<FormData>({});
+}: UniversalFormProps<T>) {
+  const [formData, setFormData] = useState<Partial<T>>({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
-  /* ✍️ HANDLE CHANGE */
-  const handleChange = (name: string, value: string) => {
+  const handleChange = (name: keyof T, value: string) => {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
 
-    // limpiar error al escribir
     setErrors((prev) => ({
       ...prev,
-      [name]: "",
+      [name as string]: "",
     }));
   };
 
-  /* 🚀 HANDLE SUBMIT */
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const result = schema.safeParse(formData);
 
     if (!result.success) {
-      const fieldErrors: FormData = {};
+      const fieldErrors: Record<string, string> = {};
 
       result.error.issues.forEach((issue) => {
         const fieldName = issue.path[0];
-
         if (typeof fieldName === "string") {
           fieldErrors[fieldName] = issue.message;
         }
@@ -70,36 +64,30 @@ export default function UniversalForm({
     }
 
     setErrors({});
-    onSubmit(result.data);
+    await onSubmit(result.data);
   };
 
   return (
     <div className="card w-full max-w-xl mx-auto">
-      {/* 🧠 HEADER */}
-      {title && (
-        <h2 className="text-2xl font-bold mb-2">
-          {title}
-        </h2>
-      )}
-
+      {title && <h2 className="text-2xl font-bold mb-2">{title}</h2>}
       {description && (
-        <p className="text-muted mb-6">
-          {description}
-        </p>
+        <p className="text-muted mb-6">{description}</p>
       )}
 
-      {/* 📝 FORM */}
       <form onSubmit={handleSubmit} className="space-y-4">
         {fields.map((field) => (
-          <div key={field.name} className="flex flex-col gap-1">
-
+          <div key={String(field.name)} className="flex flex-col gap-1">
             <label className="text-sm font-medium">
               {field.label}
             </label>
 
             {field.type === "textarea" ? (
               <textarea
-                className={`input ${errors[field.name] ? "border-red-500" : ""}`}
+                className={`input ${
+                  errors[field.name as string]
+                    ? "border-red-500"
+                    : ""
+                }`}
                 placeholder={field.placeholder}
                 required={field.required}
                 onChange={(e) =>
@@ -109,7 +97,11 @@ export default function UniversalForm({
             ) : (
               <input
                 type={field.type || "text"}
-                className={`input ${errors[field.name] ? "border-red-500" : ""}`}
+                className={`input ${
+                  errors[field.name as string]
+                    ? "border-red-500"
+                    : ""
+                }`}
                 placeholder={field.placeholder}
                 required={field.required}
                 onChange={(e) =>
@@ -118,16 +110,14 @@ export default function UniversalForm({
               />
             )}
 
-            {/* ❌ ERROR */}
-            {errors[field.name] && (
+            {errors[field.name as string] && (
               <span className="text-red-400 text-xs">
-                {errors[field.name]}
+                {errors[field.name as string]}
               </span>
             )}
           </div>
         ))}
 
-        {/* 🔘 BUTTON */}
         <button type="submit" className="btn-primary w-full">
           {submitText}
         </button>

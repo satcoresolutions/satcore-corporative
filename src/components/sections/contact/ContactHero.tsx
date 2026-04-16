@@ -11,8 +11,8 @@ export default function ContactHero() {
       ctaPrimaryText="Hablar ahora"
       ctaPrimaryLink="https://wa.me/573022016072"
 
-      ctaSecondaryText="Agendar reunión"
-      ctaSecondaryLink="#contacto"
+      ctaSecondaryText="Enviar mensaje"
+      ctaSecondaryLink="#formulario"
 
       background="/img/hero/bg_1.png"
       variant="contact"
