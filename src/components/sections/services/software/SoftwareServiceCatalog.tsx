@@ -6,6 +6,7 @@ import Modal from "@/components/ui/Modal";
 import { servicesData } from "@/data/servicesData";
 import Section from "@/components/ui/universalSection";
 import { ServiceCategory } from "@/types/service";
+import { pushEvent } from "@/lib/analytics";
 
 export default function SoftwareServiceCatalog() {
   const [selected, setSelected] = useState<ServiceCategory | null>(null);
@@ -27,16 +28,18 @@ export default function SoftwareServiceCatalog() {
 
         {/* GRID */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {servicesData.map((category) => (
+          {servicesData.map((category, index) => (
             <div
               key={category.id}
               onClick={() => {
                 setSelected(category);
 
-                window.dataLayer.push({
+                pushEvent({
                   event: "service_card_click",
                   service_name: category.category,
                   service_id: category.id,
+                  service_category: "software",
+                  position: index + 1,
                   section: "services_catalog",
                   page_path: window.location.pathname,
                 });
