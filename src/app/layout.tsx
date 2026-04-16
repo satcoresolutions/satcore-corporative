@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "../styles/globals.css";
 
 /* 🔤 FONTS */
@@ -27,17 +28,19 @@ export const metadata: Metadata = {
     description: "El núcleo tecnológico que impulsa tu negocio.",
     url: "https://satcore.solutions",
     siteName: "SatCore Solutions",
-
     locale: "es_CO",
     type: "website",
   },
 };
 
-// /* 🧩 COMPONENTES */
+/* 🧩 COMPONENTES */
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
-/* 🏗️ ROOT LAYOUT */
+/* 🔐 ENV */
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
+
+/* 🏗️ LAYOUT */
 export default function RootLayout({
   children,
 }: {
@@ -46,19 +49,40 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable}`}
     >
+      <head>
+        {/* 🔥 GOOGLE TAG MANAGER */}
+        {GTM_ID && (
+          <Script id="gtm-script" strategy="afterInteractive">
+            {`
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;
+              f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','${GTM_ID}');
+            `}
+          </Script>
+        )}
+      </head>
+
       <body className="min-h-full flex flex-col">
 
-        {/* 🔹 NAVBAR */}
+        {/* 🔥 NOSCRIPT (OBLIGATORIO) */}
+        {GTM_ID && (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            />
+          </noscript>
+        )}
+
         <Navbar />
-
-        {/* 🔹 CONTENIDO */}
-        <main className="flex-1">
-          {children}
-        </main>
-
-        {/* 🔹 FOOTER */}
+        <main className="flex-1">{children}</main>
         <Footer />
 
       </body>
