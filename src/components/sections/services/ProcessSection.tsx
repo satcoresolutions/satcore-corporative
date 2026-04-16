@@ -1,5 +1,8 @@
+"use client";
+
 import Section from "../../ui/universalSection";
 import ServiceCard from "@/components/ui/ServiceCard";
+import { motion, Variants } from "framer-motion";
 
 /* 🧠 TYPES */
 type ServiceType =
@@ -48,6 +51,33 @@ const steps: {
   },
 ];
 
+/* 🎬 ANIMACIONES */
+const container: Variants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const item: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 50,
+    scale: 0.95,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
 /* 🚀 COMPONENT */
 export default function ProcessSection() {
   return (
@@ -67,21 +97,34 @@ export default function ProcessSection() {
         </div>
 
         {/* CARDS */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6"
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-50px" }}
+        >
           {steps
             .filter((step) => step.active)
             .map((step, index) => (
-              <ServiceCard
+              <motion.div
                 key={index}
-                title={step.title}
-                subtitle={step.subtitle}           
-                variant="info"
-                size="md"
-              />
+                variants={item}
+                whileHover={{
+                  y: -5,
+                  scale: 1.04,
+                }}
+                transition={{ type: "spring", stiffness: 200 }}
+              >
+                <ServiceCard
+                  title={step.title}
+                  subtitle={step.subtitle}
+                  variant="info"
+                  size="md"
+                />
+              </motion.div>
             ))}
-
-        </div>
+        </motion.div>
 
       </div>
     </Section>

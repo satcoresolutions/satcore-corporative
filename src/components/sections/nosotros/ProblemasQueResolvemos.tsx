@@ -1,3 +1,5 @@
+"use client";
+
 import Section from "@/components/ui/universalSection";
 import ServiceCard from "@/components/ui/ServiceCard";
 import {
@@ -11,6 +13,7 @@ import {
   Rocket,
   LucideIcon,
 } from "lucide-react";
+import { motion, Variants } from "framer-motion";
 
 /* 🧠 TYPES */
 type ProblemItem = {
@@ -72,6 +75,34 @@ const problems: ProblemItem[] = [
   },
 ];
 
+/* 🎬 ANIMACIONES */
+
+// contenedor
+const container: Variants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
+};
+
+// items (cards)
+const item: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 20,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.45,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
 /* 🚀 COMPONENT */
 export default function ProblemasQueResolvemos() {
   return (
@@ -79,7 +110,12 @@ export default function ProblemasQueResolvemos() {
       <div className="container space-y-10">
 
         {/* HEADER */}
-        <div>
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
           <h2 className="text-3xl font-bold">
             Problemas que resolvemos
           </h2>
@@ -88,37 +124,44 @@ export default function ProblemasQueResolvemos() {
             Identificamos los principales bloqueos tecnológicos de las empresas
             y los transformamos en soluciones digitales escalables.
           </p>
-        </div>
+        </motion.div>
 
         {/* GRID */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {problems.map((item, index) => (
-            <ServiceCard
-              key={index}
-              title={item.problem}
-              icon={item.icon}
-              iconVariant="flatBlue"
-              variant="info"
-              size="md"
-            >
-              <div className="space-y-2">
-                <p>
-                  <span className="font-semibold text-green-500">
-                    ✔ Solución:
-                  </span>{" "}
-                  {item.solution}
-                </p>
+        <motion.div
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
+          {problems.map((itemData, index) => (
+            <motion.div key={index} variants={item}>
+              <ServiceCard
+                title={itemData.problem}
+                icon={itemData.icon}
+                iconVariant="flatBlue"
+                variant="info"
+                size="md"
+              >
+                <div className="space-y-2">
+                  <p>
+                    <span className="font-semibold text-green-500">
+                      ✔ Solución:
+                    </span>{" "}
+                    {itemData.solution}
+                  </p>
 
-                <p className="text-sm text-muted">
-                  <span className="font-semibold">
-                    🚀 Impacto:
-                  </span>{" "}
-                  {item.impact}
-                </p>
-              </div>
-            </ServiceCard>
+                  <p className="text-sm text-muted">
+                    <span className="font-semibold">
+                      🚀 Impacto:
+                    </span>{" "}
+                    {itemData.impact}
+                  </p>
+                </div>
+              </ServiceCard>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
       </div>
     </Section>

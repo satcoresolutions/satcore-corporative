@@ -2,6 +2,36 @@
 
 import { Sparkles } from "lucide-react";
 import ServiceCard from "@/components/ui/ServiceCard";
+import { motion, Variants } from "framer-motion";
+
+/* 🎬 ANIMACIONES */
+
+// texto (izquierda)
+const textVariants: Variants = {
+  hidden: { opacity: 0, x: -40 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+// card (derecha)
+const cardVariants: Variants = {
+  hidden: { opacity: 0, x: 40 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.6,
+      delay: 0.15,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
 
 export default function Historia() {
   return (
@@ -9,7 +39,12 @@ export default function Historia() {
       <div className="container grid md:grid-cols-2 gap-10 items-center">
 
         {/* 🧠 TEXTO */}
-        <div>
+        <motion.div
+          variants={textVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Nuestra Historia
           </h2>
@@ -34,18 +69,26 @@ export default function Historia() {
             y la creación de soluciones reales que generan impacto en el mundo
             digital.
           </p>
-        </div>
+        </motion.div>
 
         {/* 🚀 CARD DESTACADA */}
-        <ServiceCard
-          title="Enfoque Tecnológico"
-          subtitle="Desarrollamos soluciones digitales escalables, seguras y orientadas a resultados reales, combinando software, automatización y ciberseguridad."
-          icon={Sparkles}
-          iconVariant="circleBlue"
-          variant="light"
-          size="lg"
+        <motion.div
+          variants={cardVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
           className="h-full"
-        />
+        >
+          <ServiceCard
+            title="Enfoque Tecnológico"
+            subtitle="Desarrollamos soluciones digitales escalables, seguras y orientadas a resultados reales, combinando software, automatización y ciberseguridad."
+            icon={Sparkles}
+            iconVariant="circleBlue"
+            variant="light"
+            size="lg"
+            className="h-full"
+          />
+        </motion.div>
 
       </div>
     </section>

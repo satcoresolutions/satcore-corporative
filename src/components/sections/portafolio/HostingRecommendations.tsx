@@ -1,4 +1,7 @@
+"use client";
+
 import Section from "@/components/ui/universalSection";
+import { motion, Variants } from "framer-motion";
 
 const data = [
   {
@@ -23,12 +26,46 @@ const data = [
   },
 ];
 
+/* 🎬 ANIMACIONES */
+
+// contenedor de filas
+const tbodyVariants: Variants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
+};
+
+// cada fila
+const rowVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 15,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.4,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
 export default function HostingRecommendations() {
   return (
     <Section variant="dark" paddingY="lg">
 
       {/* HEADER */}
-      <div className="mb-10 max-w-3xl">
+      <motion.div
+        className="mb-10 max-w-3xl"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+      >
         <h2 className="text-3xl font-bold text-foreground">
           Recomendaciones de Hosting
         </h2>
@@ -36,10 +73,16 @@ export default function HostingRecommendations() {
         <p className="mt-3 text-muted">
           Seleccionamos la infraestructura adecuada según el tipo de proyecto y su escalabilidad.
         </p>
-      </div>
+      </motion.div>
 
       {/* TABLE */}
-      <div className="overflow-x-auto">
+      <motion.div
+        className="overflow-x-auto"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.4 }}
+        viewport={{ once: true }}
+      >
         <table className="w-full text-left rounded-xl overflow-hidden border border-(--color-border)">
 
           {/* HEAD */}
@@ -52,10 +95,16 @@ export default function HostingRecommendations() {
           </thead>
 
           {/* BODY */}
-          <tbody>
+          <motion.tbody
+            variants={tbodyVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+          >
             {data.map((item, index) => (
-              <tr
+              <motion.tr
                 key={index}
+                variants={rowVariants}
                 className="
                   border-t border-(--color-border)
                   hover:bg-(--color-surface-dark)
@@ -73,12 +122,12 @@ export default function HostingRecommendations() {
                 <td className="p-4 text-accent font-semibold">
                   {item.inversion}
                 </td>
-              </tr>
+              </motion.tr>
             ))}
-          </tbody>
+          </motion.tbody>
 
         </table>
-      </div>
+      </motion.div>
 
     </Section>
   );

@@ -1,9 +1,12 @@
+"use client";
+
 import {
   Lightbulb,
   Wrench,
   Cog,
   Target,
 } from "lucide-react";
+import { motion, Variants } from "framer-motion";
 
 const features = [
   {
@@ -24,28 +27,71 @@ const features = [
   },
 ];
 
+/* 🎬 ANIMACIONES */
+
+// contenedor (stagger)
+const container: Variants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+// items (slide + fade + leve escala)
+const item: Variants = {
+  hidden: {
+    opacity: 0,
+    x: -20,
+    scale: 0.98,
+  },
+  show: {
+    opacity: 1,
+    x: 0,
+    scale: 1,
+    transition: {
+      duration: 0.45,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
 export default function WhySatCore() {
   return (
     <div className="h-full flex flex-col justify-center">
 
       {/* 🔥 TITLE */}
-      <h2 className="text-3xl md:text-4xl font-bold mb-10">
+      <motion.h2
+        className="text-3xl md:text-4xl font-bold mb-10"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
         ¿Por qué SatCore?
-      </h2>
+      </motion.h2>
 
       {/* 🧩 LIST */}
-      <div className="space-y-6">
-
-        {features.map((item, index) => {
-          const Icon = item.icon;
+      <motion.div
+        className="space-y-6"
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+      >
+        {features.map((itemData, index) => {
+          const Icon = itemData.icon;
 
           return (
-            <div
+            <motion.div
               key={index}
+              variants={item}
+              whileHover={{ x: 6 }} // 🔥 micro interacción pro
               className="group flex items-center gap-4 transition"
             >
 
-              {/* 🔹 ICON CONTAINER */}
+              {/* 🔹 ICON */}
               <div
                 className="
                   flex items-center justify-center
@@ -75,14 +121,13 @@ export default function WhySatCore() {
                   transition
                 "
               >
-                {item.title}
+                {itemData.title}
               </p>
 
-            </div>
+            </motion.div>
           );
         })}
-
-      </div>
+      </motion.div>
 
     </div>
   );

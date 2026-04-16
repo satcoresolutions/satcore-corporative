@@ -7,16 +7,49 @@ import { servicesData } from "@/data/servicesData";
 import Section from "@/components/ui/universalSection";
 import { ServiceCategory } from "@/types/service";
 import { pushEvent } from "@/lib/analytics";
+import { motion, Variants } from "framer-motion";
 
 export default function SoftwareServiceCatalog() {
   const [selected, setSelected] = useState<ServiceCategory | null>(null);
+
+  /* 🎬 ANIMACIONES */
+
+  const container: Variants = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.08,
+      },
+    },
+  };
+
+  const item: Variants = {
+    hidden: {
+      opacity: 0,
+      y: 20,
+    },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.45,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
 
   return (
     <Section id="procesos" variant="white" paddingY="lg">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* TITLE */}
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
             Tipos de proyectos que desarrollamos
           </h2>
@@ -24,46 +57,57 @@ export default function SoftwareServiceCatalog() {
           <p className="text-muted max-w-2xl mx-auto">
             Soluciones digitales adaptadas a cada negocio.
           </p>
-        </div>
+        </motion.div>
 
         {/* GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
           {servicesData.map((category, index) => (
-            <div
+            <motion.div
               key={category.id}
-              onClick={() => {
-                setSelected(category);
-
-                pushEvent({
-                  event: "service_card_click",
-                  service_name: category.category,
-                  service_id: category.id,
-                  service_category: "software",
-                  position: index + 1,
-                  section: "services_catalog",
-                  page_path: window.location.pathname,
-                });
-              }}
-              className="cursor-pointer"
+              variants={item}
+              className="h-full"
             >
-              <ServiceCard
-                title={category.category}
-                subtitle={category.subtitle}
-                icon={category.icon}
-                variant="dark"
-                size="md"
-                className="text-center hover:scale-105 transition"
-              />
-            </div>
+              <div
+                onClick={() => {
+                  setSelected(category);
+
+                  pushEvent({
+                    event: "service_card_click",
+                    service_name: category.category,
+                    service_id: category.id,
+                    service_category: "software",
+                    position: index + 1,
+                    section: "services_catalog",
+                    page_path: window.location.pathname,
+                  });
+                }}
+                className="cursor-pointer h-full"
+              >
+                <ServiceCard
+                  title={category.category}
+                  subtitle={category.subtitle}
+                  icon={category.icon}
+                  variant="dark"
+                  size="md"
+                  className="text-center h-full hover:scale-105 transition"
+                />
+              </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* MODAL */}
         <Modal
           open={!!selected}
           onClose={() => setSelected(null)}
           title={selected?.category}
-          services={selected?.levels || []} // 🔥 AQUÍ ESTÁ LA MAGIA
+          services={selected?.levels || []}
         />
       </div>
     </Section>
