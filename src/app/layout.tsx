@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
+import { headers } from "next/headers";
 import "../styles/globals.css";
 
 /* 🔤 FONTS */
@@ -41,11 +42,13 @@ import Footer from "@/components/layout/Footer";
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 
 /* 🏗️ LAYOUT */
-export default function RootLayout({
+export default async function RootLayout({ 
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const headerList = await headers();
+  const nonce = headerList.get("x-nonce") || "";
   return (
     <html
       lang="es"
@@ -54,7 +57,7 @@ export default function RootLayout({
       <head>
         {/* 🔥 GOOGLE TAG MANAGER */}
         {GTM_ID && (
-          <Script id="gtm-script" strategy="afterInteractive">
+          <Script id="gtm-script" strategy="afterInteractive" nonce={nonce}>
             {`
               (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
               new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
