@@ -9,12 +9,15 @@ export default function BlogHero() {
       
       ctaPrimaryText="Explorar artículos"
       ctaPrimaryLink="#articulos"
+      ctaPrimaryType="scroll_articles"     // 🔥 intención clara
 
       ctaSecondaryText="Volver al inicio"
       ctaSecondaryLink="/"
+      ctaSecondaryType="navigation_home"   // 🔥 navegación
 
-      background="/img/hero/bg_1.png" // usa un fondo tipo tech/circuito
-      
+      section="blog"                       // 🔥 contexto
+
+      background="/img/hero/bg_1.png"
       variant="center"
       height="full"
     />
