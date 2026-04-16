@@ -7,11 +7,11 @@ export default function Footer() {
   return (
     <footer
       className="relative border-t border-white/10 
-  bg-linear-to-br 
-  from-background 
-  via-primary-dark 
-  to-background 
-  text-foreground overflow-hidden"
+      bg-linear-to-br 
+      from-background 
+      via-primary-dark 
+      to-background 
+      text-foreground overflow-hidden"
     >
       {/* 🔝 LINEA SUPERIOR */}
       <div
@@ -19,7 +19,7 @@ export default function Footer() {
         bg-linear-to-r from-transparent via-accent to-transparent opacity-40"
       />
 
-      {/* ✨ GLOW BACKGROUND */}
+      {/* ✨ GLOW */}
       <div className="absolute inset-0 pointer-events-none">
         <div
           className="absolute top-0 left-1/2 -translate-x-1/2 
@@ -30,13 +30,13 @@ export default function Footer() {
       </div>
 
       {/* 🔲 CONTENIDO */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
 
         {/* 🟢 BRAND */}
         <div className="flex flex-col justify-center items-center space-y-4">
           <BrandLogo variant="normal" usage="footer" />
 
-          <p className="text-sm text-muted leading-relaxed">
+          <p className="text-sm text-muted leading-relaxed text-center">
             SatCore Solutions transforma tu futuro digital. Expertos en desarrollo
             de software, ciberseguridad e integración de IA.
           </p>
@@ -45,7 +45,7 @@ export default function Footer() {
         {/* 🔗 LINKS */}
         <div>
           <h3 className="text-lg font-semibold text-accent mb-4">
-            Enlaces rápidos
+            Enlaces
           </h3>
 
           <ul className="space-y-2 text-sm text-muted">
@@ -53,7 +53,33 @@ export default function Footer() {
             <li><Link href="/nosotros" className="hover:text-accent transition">Nosotros</Link></li>
             <li><Link href="/servicios" className="hover:text-accent transition">Servicios</Link></li>
             <li><Link href="/portafolio" className="hover:text-accent transition">Portafolio</Link></li>
+            <li><Link href="/blog" className="hover:text-accent transition">Blog</Link></li>
             <li><Link href="/contacto" className="hover:text-accent transition">Contacto</Link></li>
+          </ul>
+        </div>
+
+        {/* ⚖️ LEGAL */}
+        <div>
+          <h3 className="text-lg font-semibold text-accent mb-4">
+            Legal
+          </h3>
+
+          <ul className="space-y-2 text-sm text-muted">
+            <li>
+              <Link href="/terminos" className="hover:text-accent transition">
+                Términos y condiciones
+              </Link>
+            </li>
+            <li>
+              <Link href="/privacidad" className="hover:text-accent transition">
+                Política de privacidad
+              </Link>
+            </li>
+            <li>
+              <Link href="/faq" className="hover:text-accent transition">
+                Preguntas frecuentes
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -66,14 +92,14 @@ export default function Footer() {
           <ul className="space-y-4 text-sm text-muted">
 
             <li className="flex items-center gap-3">
-              <Image src="/icons/mail.png" alt="Correo SatCore" width={18} height={18} />
+              <Image src="/icons/mail.png" alt="Correo" width={18} height={18} />
               <a href="mailto:satcoresolutions@gmail.com" className="hover:text-accent transition">
                 satcoresolutions@gmail.com
               </a>
             </li>
 
             <li className="flex items-center gap-3">
-              <Image src="/icons/whatsapp.png" alt="WhatsApp SatCore" width={18} height={18} />
+              <Image src="/icons/whatsapp.png" alt="WhatsApp" width={18} height={18} />
               <a
                 href="https://wa.me/573022016072"
                 target="_blank"
@@ -85,7 +111,7 @@ export default function Footer() {
             </li>
 
             <li className="flex items-center gap-3">
-              <Image src="/icons/site.png" alt="Ubicación SatCore" width={18} height={18} />
+              <Image src="/icons/site.png" alt="Ubicación" width={18} height={18} />
               <span>Bogotá, Colombia</span>
             </li>
 

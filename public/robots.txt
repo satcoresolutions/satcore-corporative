@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://satcore.solutions
+
+# Sitemaps
+Sitemap: https://satcore.solutions/sitemap.xml
