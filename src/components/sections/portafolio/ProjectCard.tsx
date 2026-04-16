@@ -24,7 +24,21 @@ export default function ProjectCard({ project }: { project: Project }) {
   const Icon = config?.icon;
 
   return (
-    <Link href={project.href} target="_blank">
+    <Link
+      href={project.href}
+      target="_blank"
+      onClick={() => {
+        window.dataLayer.push({
+          event: "project_click",
+          project_title: project.title,
+          project_category: project.category,
+          project_service: project.service,
+          project_id: project.id,
+          section: "projects_grid",
+          page_path: window.location.pathname,
+        });
+      }}
+    >
       <div className="group relative rounded-xl overflow-hidden cursor-pointer border border-white/10">
 
         {/* IMAGE */}

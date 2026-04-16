@@ -125,10 +125,10 @@ export default function Footer() {
           </h3>
 
           <div className="flex items-center gap-4">
-            <SocialIcon size="lg" type="instagram" href="https://instagram.com/satcore_solutions" />
-            <SocialIcon size="lg" type="tiktok" href="https://www.tiktok.com/@satcore_solutions" />
-            <SocialIcon size="lg" type="youtube" href="https://www.youtube.com/@SatCore_Solutions" />
-            <SocialIcon size="lg" type="facebook" href="https://www.facebook.com/SatCore.Solutions/" />
+            <SocialIcon section="footer" size="lg" type="instagram" href="https://instagram.com/satcore_solutions" />
+            <SocialIcon section="footer" size="lg" type="tiktok" href="https://www.tiktok.com/@satcore_solutions" />
+            <SocialIcon section="footer" size="lg" type="youtube" href="https://www.youtube.com/@SatCore_Solutions" />
+            <SocialIcon section="footer" size="lg" type="facebook" href="https://www.facebook.com/SatCore.Solutions/" />
           </div>
         </div>
 

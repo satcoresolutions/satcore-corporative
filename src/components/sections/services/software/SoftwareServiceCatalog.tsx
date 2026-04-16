@@ -30,7 +30,17 @@ export default function SoftwareServiceCatalog() {
           {servicesData.map((category) => (
             <div
               key={category.id}
-              onClick={() => setSelected(category)}
+              onClick={() => {
+                setSelected(category);
+
+                window.dataLayer.push({
+                  event: "service_card_click",
+                  service_name: category.category,
+                  service_id: category.id,
+                  section: "services_catalog",
+                  page_path: window.location.pathname,
+                });
+              }}
               className="cursor-pointer"
             >
               <ServiceCard
