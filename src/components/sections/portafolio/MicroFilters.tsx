@@ -28,8 +28,22 @@ const labels: Record<MicroFilter, string> = {
   custom: "A medida",
 };
 
+const trackFilter = (filter: string, macro: string) => {
+  if (typeof window === "undefined") return;
+
+  window.dataLayer = window.dataLayer || [];
+
+  window.dataLayer.push({
+    event: "filter_select",
+    filter_type: "micro",
+    filter_value: filter,
+    parent_macro: macro,
+    page_path: window.location.pathname,
+  });
+};
+
 export default function MicroFilters({ active, onChange, macro }: Props) {
-  
+
   /* 🚫 NO MOSTRAR SI NO HAY MACRO */
   if (macro === "Todos") return null;
 
@@ -40,14 +54,16 @@ export default function MicroFilters({ active, onChange, macro }: Props) {
       {filters.map((filter) => (
         <button
           key={filter}
-          onClick={() => onChange(filter)}
+          onClick={() => {
+            onChange(filter);
+            trackFilter(filter, macro);
+          }}
           className={`
             px-4 py-2 rounded-full text-sm transition
             border border-(--color-border)
-            ${
-              active === filter
-                ? "bg-accent text-black font-semibold"
-                : "bg-(--color-surface-light) text-(--color-muted-light) hover:opacity-80"
+            ${active === filter
+              ? "bg-accent text-black font-semibold"
+              : "bg-(--color-surface-light) text-(--color-muted-light) hover:opacity-80"
             }
           `}
         >
