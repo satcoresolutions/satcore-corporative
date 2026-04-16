@@ -34,27 +34,42 @@ export const metadata: Metadata = {
   authors: [{ name: "SatCore Solutions" }],
   creator: "SatCore Solutions",
   publisher: "SatCore Solutions",
-  metadataBase: new URL("https://satcore.solutions"),
+
+  metadataBase: new URL("https://www.satcore.solutions"),
+
   alternates: {
     canonical: "/",
   },
+
   robots: {
     index: true,
     follow: true,
   },
+
   openGraph: {
     title: "SatCore Solutions",
     description: "El núcleo tecnológico que impulsa tu negocio.",
-    url: "https://satcore.solutions",
+    url: "https://www.satcore.solutions",
     siteName: "SatCore Solutions",
     locale: "es_CO",
     type: "website",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "SatCore Solutions desarrollo web profesional",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "SatCore Solutions",
+    description: "El núcleo tecnológico que impulsa tu negocio.",
+    images: ["/og-image.jpg"],
   },
 };
-
-/* 🧩 COMPONENTES */
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 
 /* 🔐 ENV */
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
@@ -67,12 +82,17 @@ export default async function RootLayout({
 }) {
   const headerList = await headers();
   const nonce = headerList.get("x-nonce") || "";
+
   return (
     <html
       lang="es"
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
       <head>
+        {/* ⚡ PRECONNECT (mejora performance) */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" />
+
         {/* 🔥 GOOGLE TAG MANAGER */}
         {GTM_ID && (
           <Script id="gtm-script" strategy="afterInteractive" nonce={nonce}>
@@ -86,11 +106,32 @@ export default async function RootLayout({
             `}
           </Script>
         )}
+
+        {/* 🧠 SCHEMA ORG (SEO PRO) */}
+        <Script
+          id="schema-org"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "SatCore Solutions",
+              url: "https://www.satcore.solutions",
+              logo: "https://www.satcore.solutions/logos/01_Logo_Principal.png",
+              sameAs: [
+                "https://instagram.com/satcore_solutions",
+                "https://www.facebook.com/SatCore.Solutions/",
+                "https://www.youtube.com/@SatCore_Solutions",
+                "https://www.tiktok.com/@satcore_solutions",
+              ],
+            }),
+          }}
+        />
       </head>
 
       <body className="min-h-full flex flex-col">
-
-        {/* 🔥 NOSCRIPT (OBLIGATORIO) */}
+        {/* 🔥 NOSCRIPT (GTM obligatorio) */}
         {GTM_ID && (
           <noscript>
             <iframe
@@ -102,11 +143,15 @@ export default async function RootLayout({
           </noscript>
         )}
 
+        {/* 🧩 COMPONENTES */}
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
-
       </body>
     </html>
   );
 }
+
+/* 🧩 IMPORTS AL FINAL (opcional orden) */
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
