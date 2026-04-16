@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Globe, Layout, AppWindow, Shield, LucideIcon } from "lucide-react";
 import { Project, ProjectService } from "@/types/project";
+import { pushEvent } from "@/lib/analytics";
 
 /* 🧠 CONFIG TIPADA CORRECTAMENTE */
 const serviceConfig: Record<
@@ -27,8 +28,8 @@ export default function ProjectCard({ project }: { project: Project }) {
     <Link
       href={project.href}
       target="_blank"
-      onClick={() => {
-        window.dataLayer.push({
+      onClick={(e) => {
+        pushEvent({
           event: "project_click",
           project_title: project.title,
           project_category: project.category,
@@ -37,6 +38,13 @@ export default function ProjectCard({ project }: { project: Project }) {
           section: "projects_grid",
           page_path: window.location.pathname,
         });
+
+        // 🔥 pequeña pausa para asegurar envío
+        setTimeout(() => {
+          window.open(project.href, "_blank");
+        }, 150);
+
+        e.preventDefault();
       }}
     >
       <div className="group relative rounded-xl overflow-hidden cursor-pointer border border-white/10">

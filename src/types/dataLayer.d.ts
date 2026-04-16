@@ -31,6 +31,7 @@ declare global {
     event: "social_click";
     social_platform: string;
     page_path: string;
+    link_url?: string;
   }
 
   interface FilterSelectEvent extends BaseEvent {
@@ -69,7 +70,7 @@ declare global {
     | FilterSelectEvent
     | ServiceCardClickEvent
     | ProjectClickEvent
-    | BaseEvent;
+    | BaseEvent; // Para eventos genéricos sin propiedades adicionales
 
   interface Window {
     dataLayer: DataLayerEvent[];
