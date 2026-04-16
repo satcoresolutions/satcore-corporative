@@ -6,7 +6,20 @@ interface SocialIconProps {
     type: SocialType;
     href: string;
     size?: "sm" | "md" | "lg";
+    section?: string;
 }
+
+const trackSocial = (platform: string) => {
+  if (typeof window === "undefined") return;
+
+  window.dataLayer = window.dataLayer || [];
+
+  window.dataLayer.push({
+    event: "social_click",
+    social_platform: platform,
+    page_path: window.location.pathname,
+  });
+};
 
 export default function SocialIcon({
     type,
@@ -32,6 +45,7 @@ export default function SocialIcon({
             href={href}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackSocial(type)}
             className="group flex items-center justify-center"
         >
             <Image
