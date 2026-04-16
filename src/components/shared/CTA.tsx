@@ -17,6 +17,11 @@ interface CTAProps {
   tertiaryText?: string;
   tertiaryLink?: string;
 
+  ctaPrimaryType?: string;
+  ctaSecondaryType?: string;
+  ctaTertiaryType?: string;
+  section?: string;
+
   badge?: string;
 }
 
@@ -29,6 +34,19 @@ const isExternal = (url: string) =>
   url.startsWith("mailto") ||
   url.startsWith("tel");
 
+const trackCTA = (type: string, label: string, section?: string) => {
+  if (typeof window === "undefined") return;
+
+  window.dataLayer = window.dataLayer || [];
+
+  window.dataLayer.push({
+    event: "cta_click",
+    cta_type: type,
+    cta_label: label,
+    section: section || "unknown",
+    page_path: window.location.pathname,
+  });
+};
 export default function CTA({
   title,
   highlight,
@@ -39,6 +57,10 @@ export default function CTA({
   secondaryLink,
   tertiaryText,
   tertiaryLink,
+  ctaPrimaryType = "primary",
+  ctaSecondaryType = "secondary",
+  ctaTertiaryType = "pdf_view",
+  section = "unknown",
   badge,
 }: CTAProps) {
   return (
@@ -74,6 +96,7 @@ export default function CTA({
           {isExternal(primaryLink) ? (
             <a
               href={primaryLink}
+              onClick={() => trackCTA(ctaPrimaryType || "primary", primaryText, section)}
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-3.5 rounded-xl bg-accent text-black font-semibold shadow-lg hover:scale-[1.05] transition"
@@ -83,6 +106,7 @@ export default function CTA({
           ) : (
             <Link
               href={primaryLink}
+              onClick={() => trackCTA(ctaPrimaryType || "primary", primaryText, section)}
               className="px-8 py-3.5 rounded-xl bg-accent text-black font-semibold shadow-lg hover:scale-[1.05] transition"
             >
               {primaryText}
@@ -94,6 +118,7 @@ export default function CTA({
             isExternal(secondaryLink) ? (
               <a
                 href={secondaryLink}
+                onClick={() => trackCTA(ctaSecondaryType || "secondary", secondaryText, section)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-8 py-3.5 rounded-xl border border-white/20 text-white hover:bg-white/10 transition"
@@ -103,6 +128,7 @@ export default function CTA({
             ) : (
               <Link
                 href={secondaryLink}
+                onClick={() => trackCTA(ctaSecondaryType || "secondary", secondaryText, section)}
                 className="px-8 py-3.5 rounded-xl border border-white/20 text-white hover:bg-white/10 transition"
               >
                 {secondaryText}
@@ -118,6 +144,7 @@ export default function CTA({
             {/* 👁️ VER PDF (PRINCIPAL PARA PDF) */}
             <a
               href={tertiaryLink}
+              onClick={() => trackCTA(ctaTertiaryType || "pdf_view", tertiaryText, section)}
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-white/70 hover:text-accent underline underline-offset-4 transition"
@@ -128,6 +155,7 @@ export default function CTA({
             {/* ⬇️ DESCARGAR (SECUNDARIO) */}
             <a
               href={tertiaryLink}
+              onClick={() => trackCTA("pdf_download", "Descargar PDF", section)}
               download={getFileName(tertiaryLink)}
               className="text-xs text-white/40 hover:text-accent transition"
             >
