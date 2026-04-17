@@ -2,6 +2,7 @@
 
 import { Target, Eye } from "lucide-react";
 import ServiceCard from "@/components/ui/ServiceCard";
+import Section from "@/components/ui/universalSection";
 import { motion, Variants } from "framer-motion";
 
 /* 🎬 ANIMACIONES */
@@ -48,7 +49,7 @@ const rightCard: Variants = {
 
 export default function MisionVision() {
   return (
-    <section className="section">
+    <Section variant="white" paddingY="md">
       <div className="container">
 
         {/* TITLE */}
@@ -112,6 +113,6 @@ export default function MisionVision() {
         </div>
 
       </div>
-    </section>
+    </Section>
   );
 }

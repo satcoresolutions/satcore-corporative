@@ -84,7 +84,7 @@ const listItem: Variants = {
 export default function SoftwareScope() {
   return (
     <Section variant="white" paddingY="md">
-      <div className="max-w-6xl mx-auto px-6">
+      
 
         {/* 🔥 TITLE */}
         <motion.div
@@ -168,7 +168,7 @@ export default function SoftwareScope() {
 
         </motion.div>
 
-      </div>
+      
     </Section>
   );
 }
