@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Section from "@/components/ui/universalSection";
 
 const stacks = [
   // FRONTEND
@@ -33,7 +34,7 @@ export default function SoftwareTechStack() {
   const looped = [...stacks, ...stacks];
 
   return (
-    <section className="py-10 bg-primary-dark text-white overflow-hidden">
+    <Section variant="dark" paddingY="md">
 
       {/* 🔥 TITLE */}
       <div className="text-center mb-14">
@@ -70,6 +71,6 @@ export default function SoftwareTechStack() {
 
       </div>
 
-    </section>
+    </Section>
   );
 }

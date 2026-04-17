@@ -76,6 +76,11 @@ body {
   font-family: var(--font-sans);
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 /* 🌞 LIGHT MODE ACTIVABLE */
 .light {
   background: var(--color-bg-light);
