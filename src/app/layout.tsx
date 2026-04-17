@@ -23,6 +23,9 @@ export const metadata: Metadata = {
   },
   description:
     "Desarrollo web de alto impacto para empresas. Automatiza procesos, optimiza tu operación y escala tu negocio con soluciones tecnológicas a medida.",
+  icons: {
+    icon: "/favicon.ico",
+  },
   keywords: [
     "desarrollo web",
     "software a medida",
