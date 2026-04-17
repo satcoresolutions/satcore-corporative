@@ -2,6 +2,7 @@
 
 import { Sparkles } from "lucide-react";
 import ServiceCard from "@/components/ui/ServiceCard";
+import Section from "@/components/ui/universalSection";
 import { motion, Variants } from "framer-motion";
 
 /* 🎬 ANIMACIONES */
@@ -35,7 +36,7 @@ const cardVariants: Variants = {
 
 export default function Historia() {
   return (
-    <section className="section">
+    <Section variant="white" paddingY="md">
       <div className="container grid md:grid-cols-2 gap-10 items-center">
 
         {/* 🧠 TEXTO */}
@@ -91,6 +92,6 @@ export default function Historia() {
         </motion.div>
 
       </div>
-    </section>
+    </Section>
   );
 }
