@@ -19,7 +19,7 @@ const stacks = [
 
     // WORKFLOWS
     { name: "n8n", icon: "/icons/stack/n8n.webp" },
-    { name: "Make", icon: "/icons/stack/make.webp" },
+
 
     // BASES DE DATOS
     { name: "PostgreSQL", icon: "/icons/stack/postgresql.webp" },
