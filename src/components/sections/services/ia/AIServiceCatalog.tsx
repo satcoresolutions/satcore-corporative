@@ -9,7 +9,7 @@ import { ServiceCategory } from "@/types/service";
 import { pushEvent } from "@/lib/analytics";
 import { motion, Variants } from "framer-motion";
 
-export default function SoftwareServiceCatalog() {
+export default function AIServiceCatalog() {
   const [selected, setSelected] = useState<ServiceCategory | null>(null);
 
   /* 🎬 ANIMACIONES */
@@ -39,7 +39,7 @@ export default function SoftwareServiceCatalog() {
   };
 
   return (
-    <Section id="procesos" variant="white" paddingY="lg">
+    <Section id="servicios" variant="white" paddingY="lg">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* TITLE */}
@@ -51,11 +51,11 @@ export default function SoftwareServiceCatalog() {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
-            Tipos de proyectos que desarrollamos
+            Servicios de automatización e IA
           </h2>
 
           <p className="text-muted max-w-2xl mx-auto">
-            Soluciones digitales adaptadas a cada negocio.
+            Soluciones inteligentes adaptadas a cada negocio.
           </p>
         </motion.div>
 
@@ -67,7 +67,7 @@ export default function SoftwareServiceCatalog() {
           whileInView="show"
           viewport={{ once: true }}
         >
-          {servicesRegistry.software.map((category, index) => (
+          {servicesRegistry.automation.map((category, index) => (
             <motion.div
               key={category.id}
               variants={item}
@@ -81,7 +81,7 @@ export default function SoftwareServiceCatalog() {
                     event: "service_card_click",
                     service_name: category.category,
                     service_id: category.id,
-                    service_category: "software",
+                    service_category: "ai_automation", // 🔥 solo cambio aquí
                     position: index + 1,
                     section: "services_catalog",
                     page_path: window.location.pathname,

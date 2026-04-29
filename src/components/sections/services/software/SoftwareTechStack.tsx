@@ -48,7 +48,7 @@ export default function SoftwareTechStack() {
       </div>
 
       {/* 🚀 MARQUEE */}
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden marquee-fade">
 
         <div className="flex items-center gap-16 w-max animate-scroll">
 

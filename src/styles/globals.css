@@ -211,3 +211,21 @@ body {
 .animate-scroll {
   animation: scroll 30s linear infinite;
 }
+
+.marquee-fade {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 15%,
+    black 85%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 15%,
+    black 85%,
+    transparent
+  );
+  backdrop-filter: blur(2px);
+}
