@@ -25,7 +25,7 @@ const stacks = [
 
     // TOOLS
     { name: "Git", icon: "/icons/stack/git.webp" },
-    { name: "Docker", icon: "/icons/stack/docker.webp" },
+    { name: "Docker", icon: "/icons/stack/Docker.webp" },
 ];
 
 export default function SecurityTechStack() {
