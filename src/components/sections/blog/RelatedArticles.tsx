@@ -1,6 +1,6 @@
 "use client";
 
-import { blogPosts } from "@/data/blog";
+import { blogPosts } from "@/types/blog";
 import BlogCard from "./BlogCard";
 import { motion, Variants } from "framer-motion";
 
