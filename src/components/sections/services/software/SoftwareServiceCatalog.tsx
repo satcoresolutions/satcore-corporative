@@ -3,7 +3,7 @@
 import { useState } from "react";
 import ServiceCard from "@/components/ui/ServiceCard";
 import Modal from "@/components/ui/Modal";
-import { servicesData } from "@/data/servicesData";
+import { servicesRegistry } from "@/data/services";
 import Section from "@/components/ui/universalSection";
 import { ServiceCategory } from "@/types/service";
 import { pushEvent } from "@/lib/analytics";
@@ -67,7 +67,7 @@ export default function SoftwareServiceCatalog() {
           whileInView="show"
           viewport={{ once: true }}
         >
-          {servicesData.map((category, index) => (
+          {servicesRegistry.software.map((category, index) => (
             <motion.div
               key={category.id}
               variants={item}

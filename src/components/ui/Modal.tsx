@@ -1,5 +1,5 @@
 "use client";
-
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { ServiceLevel } from "@/types/service";
@@ -11,15 +11,15 @@ interface ModalProps {
     services: ServiceLevel[];
 }
 
+
 export default function Modal({
     open,
     onClose,
     title,
     services,
 }: ModalProps) {
-
     const [activeId, setActiveId] = useState<string | null>(null);
-
+    const router = useRouter();
     const active =
         services.find((s) => s.id === activeId) || services[0];
 
@@ -53,63 +53,57 @@ export default function Modal({
 
             {/* MODAL */}
             <div className="
-                relative z-10 w-full max-w-5xl
-
-    max-h-[90vh] md:max-h-[85vh]
-    overflow-y-auto
-
-    rounded-xl
-    bg-(--color-bg-light)
-    shadow-[0_20px_60px_rgba(0,0,0,0.4)]
-    border border-(--color-border)
-            ">
+        relative z-10 w-full max-w-6xl
+        h-[90vh]
+        rounded-xl
+        bg-(--color-bg-light)
+        shadow-[0_20px_60px_rgba(0,0,0,0.4)]
+        border border-(--color-border)
+        overflow-hidden
+      ">
 
                 {/* HEADER */}
                 <div className="
-                    flex items-center justify-between
-                    p-(--space-lg)
-                    border-b border-(--color-border)
-                ">
+          flex items-center justify-between
+          p-(--space-lg)
+          border-b border-(--color-border)
+        ">
                     <h2 className="text-xl font-semibold text-(--color-text-light)">
                         {title}
                     </h2>
 
                     <button
                         onClick={onClose}
-                        className="
-                            p-2 rounded-sm
-                            hover:bg-(--color-surface-light)
-                            transition
-                        "
+                        className="p-2 rounded-sm hover:bg-(--color-surface-light)"
                     >
                         <X size={20} className="text-(--color-text-light)" />
                     </button>
                 </div>
 
-                {/* CONTENT */}
-                <div className="grid grid-cols-1 md:grid-cols-3 min-h-105">
+                {/* BODY */}
+                <div className="grid grid-cols-1 md:grid-cols-3 h-[calc(90vh-80px)]">
 
-                    {/* LEFT PANEL */}
+                    {/* 🔥 ASIDE FIJO */}
                     <div className="
-                        border-r border-(--color-border)
-                        bg-(--color-surface-light)
-                        p-(--space-md)
-                        space-y-2
-                    ">
+            border-r border-(--color-border)
+            bg-(--color-surface-light)
+            p-(--space-md)
+            space-y-2
+          ">
                         {services.map((service) => (
                             <button
                                 key={service.id}
                                 onClick={() => setActiveId(service.id)}
                                 className={`
-                                    w-full text-left
-                                    p-(--space-sm)
-                                    rounded-md
-                                    transition
-                                    ${active?.id === service.id
+                  w-full text-left
+                  p-(--space-sm)
+                  rounded-md
+                  transition
+                  ${active?.id === service.id
                                         ? "bg-primary-dark text-foreground"
                                         : "hover:bg-(--color-bg-light) text-(--color-text-light)"
                                     }
-                                `}
+                `}
                             >
                                 <p className="font-medium">{service.name}</p>
                                 <p className="text-xs opacity-70">
@@ -119,13 +113,14 @@ export default function Modal({
                         ))}
                     </div>
 
-                    {/* RIGHT PANEL */}
+                    {/* 🔥 CONTENT SCROLL */}
                     <div className="
-                        md:col-span-2
-                        p-(--space-lg)
-                        space-y-5
-                        text-(--color-text-light)
-                    ">
+            md:col-span-2
+            p-(--space-lg)
+            space-y-6
+            text-(--color-text-light)
+            overflow-y-auto
+          ">
 
                         {active && (
                             <>
@@ -147,19 +142,60 @@ export default function Modal({
                                     <p><strong>Complejidad:</strong> {active.complexity}</p>
                                 </div>
 
+                                {/* TARGET */}
+                                {active.target && (
+                                    <div>
+                                        <strong>¿Para quién es?</strong>
+                                        <p className="text-sm mt-1 opacity-80">
+                                            {active.target}
+                                        </p>
+                                    </div>
+                                )}
+
+                                {/* USE CASES */}
+                                {active.useCases && (
+                                    <div>
+                                        <strong>Casos de uso</strong>
+                                        <ul className="list-disc pl-5 mt-2 text-sm">
+                                            {active.useCases.map((u, i) => (
+                                                <li key={i}>{u}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
+
+                                {/* INCLUDES */}
+                                {active.includes && (
+                                    <div>
+                                        <strong>Qué incluye</strong>
+                                        <ul className="list-disc pl-5 mt-2 text-sm">
+                                            {active.includes.map((item, i) => (
+                                                <li key={i}>{item}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
+
+                                {/* NOT INCLUDES */}
+                                {active.notIncludes && (
+                                    <div>
+                                        <strong>No incluye</strong>
+                                        <ul className="list-disc pl-5 mt-2 text-sm opacity-70">
+                                            {active.notIncludes.map((item, i) => (
+                                                <li key={i}>{item}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
+
                                 {/* STACK */}
                                 <div>
-                                    <strong>Stack</strong>
+                                    <strong>Tecnologías</strong>
                                     <div className="flex flex-wrap gap-2 mt-2">
                                         {active.stack.map((tech, i) => (
                                             <span
                                                 key={i}
-                                                className="
-                                                    px-2 py-1
-                                                    rounded-sm
-                                                    text-xs
-                                                    bg-(--color-surface-light)
-                                                "
+                                                className="px-2 py-1 rounded-sm text-xs bg-(--color-surface-light)"
                                             >
                                                 {tech}
                                             </span>
@@ -169,7 +205,7 @@ export default function Modal({
 
                                 {/* FEATURES */}
                                 <div>
-                                    <strong>Incluye</strong>
+                                    <strong>Características</strong>
                                     <ul className="list-disc pl-5 mt-2 text-sm">
                                         {active.features.map((f, i) => (
                                             <li key={i}>{f}</li>
@@ -177,21 +213,55 @@ export default function Modal({
                                     </ul>
                                 </div>
 
+                                {/* DELIVERABLES */}
+                                <div>
+                                    <strong>Entregables</strong>
+                                    <ul className="list-disc pl-5 mt-2 text-sm">
+                                        {active.deliverables.map((d, i) => (
+                                            <li key={i}>{d}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                {/* INTEGRATIONS */}
+                                {active.integrations && (
+                                    <div>
+                                        <strong>Integraciones</strong>
+                                        <div className="flex flex-wrap gap-2 mt-2">
+                                            {active.integrations.map((int, i) => (
+                                                <span
+                                                    key={i}
+                                                    className="px-2 py-1 text-xs rounded bg-(--color-surface-light)"
+                                                >
+                                                    {int}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* SUPPORT */}
+                                {active.support && (
+                                    <div className="text-sm">
+                                        <strong>Soporte:</strong> {active.support}
+                                    </div>
+                                )}
+
                                 {/* CTA */}
                                 <button
+                                    onClick={() => router.push("/contacto")}
                                     className="
-                                        mt-4 w-full
-                                        py-3
-                                        rounded-md
-                                        bg-accent
-                                        text-black
-                                        font-semibold
-                                        hover:scale-[1.02]
-                                        hover:shadow-[0_0_20px_rgba(27,255,60,0.4)]
-                                        transition
-                                    "
+    mt-6 w-full
+    py-3
+    rounded-md
+    bg-accent
+    text-black
+    font-semibold
+    hover:scale-[1.02]
+    transition
+  "
                                 >
-                                    Seleccionar plan ({active.id})
+                                    Cotizar este servicio
                                 </button>
                             </>
                         )}

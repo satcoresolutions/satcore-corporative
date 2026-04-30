@@ -1,15 +1,17 @@
 "use client";
+
 import Link from "next/link";
 import { useState, useMemo } from "react";
-import { blogPosts } from "@/data/blog";
 import BlogCard from "./BlogCard";
+import { BlogPost } from "@/types/blog";
 
 const ITEMS_PER_PAGE = 9;
 
-export default function BlogGrid() {
+
+export default function BlogGrid({ posts }: { posts: BlogPost[] }) {
     const [page, setPage] = useState(1);
 
-    const totalPages = Math.ceil(blogPosts.length / ITEMS_PER_PAGE);
+    const totalPages = Math.ceil(posts.length / ITEMS_PER_PAGE);
 
     /* 🧠 NORMALIZAR PAGE */
     const safePage = Math.min(page, totalPages || 1);
@@ -18,8 +20,8 @@ export default function BlogGrid() {
     const paginatedPosts = useMemo(() => {
         const start = (safePage - 1) * ITEMS_PER_PAGE;
         const end = start + ITEMS_PER_PAGE;
-        return blogPosts.slice(start, end);
-    }, [safePage]);
+        return posts.slice(start, end);
+    }, [safePage, posts]);
 
     /* ⬆️ CAMBIO DE PÁGINA */
     const handlePageChange = (newPage: number) => {
@@ -30,10 +32,9 @@ export default function BlogGrid() {
     };
 
     /* 🚫 EMPTY STATE */
-    if (blogPosts.length === 0) {
+    if (posts.length === 0) {
         return (
             <div className="max-w-6xl mx-auto px-6 text-center py-24">
-
                 <h2 className="text-3xl font-bold text-(--color-text-light)">
                     Contenido en camino
                 </h2>
@@ -47,18 +48,16 @@ export default function BlogGrid() {
                     Muy pronto encontrarás contenido de alto valor aquí.
                 </p>
 
-                {/* CTA */}
                 <Link
                     href="/#contacto"
                     className="
-    inline-block mt-6 px-6 py-3 rounded-xl
-    bg-accent text-black font-medium text-sm
-    hover:opacity-90 transition
-  "
+                    inline-block mt-6 px-6 py-3 rounded-xl
+                    bg-accent text-black font-medium text-sm
+                    hover:opacity-90 transition
+                    "
                 >
                     Hablar con un experto
                 </Link>
-
             </div>
         );
     }
@@ -74,7 +73,7 @@ export default function BlogGrid() {
             {/* 🧱 GRID */}
             <div className="grid md:grid-cols-3 gap-6">
                 {paginatedPosts.map((post) => (
-                    <BlogCard key={post.id} post={post} />
+                    <BlogCard key={post.slug} post={post} />
                 ))}
             </div>
 
@@ -87,13 +86,13 @@ export default function BlogGrid() {
                         onClick={() => handlePageChange(safePage - 1)}
                         disabled={safePage === 1}
                         className={`
-              px-4 py-2 rounded-lg text-sm
-              border border-(--color-border)
-              ${safePage === 1
+                        px-4 py-2 rounded-lg text-sm
+                        border border-(--color-border)
+                        ${safePage === 1
                                 ? "opacity-40 cursor-not-allowed"
                                 : "hover:bg-(--color-surface-light)"
                             }
-            `}
+                        `}
                     >
                         ←
                     </button>
@@ -107,13 +106,13 @@ export default function BlogGrid() {
                                 key={pageNumber}
                                 onClick={() => handlePageChange(pageNumber)}
                                 className={`
-                  px-4 py-2 rounded-lg text-sm transition
-                  border border-(--color-border)
-                  ${safePage === pageNumber
+                                px-4 py-2 rounded-lg text-sm transition
+                                border border-(--color-border)
+                                ${safePage === pageNumber
                                         ? "bg-accent text-black font-semibold"
                                         : "bg-(--color-surface-light) text-(--color-muted-light) hover:opacity-80"
                                     }
-                `}
+                                `}
                             >
                                 {pageNumber}
                             </button>
@@ -125,13 +124,13 @@ export default function BlogGrid() {
                         onClick={() => handlePageChange(safePage + 1)}
                         disabled={safePage === totalPages}
                         className={`
-              px-4 py-2 rounded-lg text-sm
-              border border-(--color-border)
-              ${safePage === totalPages
+                        px-4 py-2 rounded-lg text-sm
+                        border border-(--color-border)
+                        ${safePage === totalPages
                                 ? "opacity-40 cursor-not-allowed"
                                 : "hover:bg-(--color-surface-light)"
                             }
-            `}
+                        `}
                     >
                         →
                     </button>
