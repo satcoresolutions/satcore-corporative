@@ -1,16 +1,14 @@
 "use client";
 
-import { blogPosts } from "@/types/blog";
+import { BlogPost } from "@/types/blog";
 import BlogCard from "./BlogCard";
 import { motion, Variants } from "framer-motion";
 
 interface Props {
-  currentId?: number;
+  posts: BlogPost[];
+  currentSlug?: string;
 }
 
-/* 🎬 ANIMACIONES */
-
-// contenedor
 const container: Variants = {
   hidden: {},
   show: {
@@ -20,7 +18,6 @@ const container: Variants = {
   },
 };
 
-// items
 const item: Variants = {
   hidden: { opacity: 0, y: 15 },
   show: {
@@ -33,15 +30,13 @@ const item: Variants = {
   },
 };
 
-export default function RelatedArticles({ currentId }: Props) {
-  const related = blogPosts
-    .filter((post) => post.id !== currentId)
+export default function RelatedArticles({ posts, currentSlug }: Props) {
+  const related = posts
+    .filter((post) => post.slug !== currentSlug)
     .slice(0, 3);
 
   return (
     <div className="mt-20">
-
-      {/* TITLE */}
       <motion.h2
         className="text-2xl font-bold text-(--color-text-light) mb-6"
         initial={{ opacity: 0, y: 10 }}
@@ -52,7 +47,6 @@ export default function RelatedArticles({ currentId }: Props) {
         Artículos relacionados
       </motion.h2>
 
-      {/* GRID */}
       <motion.div
         className="grid md:grid-cols-3 gap-6"
         variants={container}
@@ -61,12 +55,11 @@ export default function RelatedArticles({ currentId }: Props) {
         viewport={{ once: true }}
       >
         {related.map((post) => (
-          <motion.div key={post.id} variants={item}>
+          <motion.div key={post.slug} variants={item}>
             <BlogCard post={post} />
           </motion.div>
         ))}
       </motion.div>
-
     </div>
   );
 }
