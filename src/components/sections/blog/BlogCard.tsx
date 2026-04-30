@@ -2,10 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { BlogPost } from "@/data/blog";
 import { motion } from "framer-motion";
+import { BlogPost } from "@/types/blog";
 
-export default function BlogCard({ post }: { post: BlogPost }) {
+type BlogCardProps = Pick<
+  BlogPost,
+  "title" | "description" | "slug" | "image" | "category" | "date" | "readingTime"
+>;
+
+export default function BlogCard({ post }: { post: BlogCardProps }) {
   return (
     <Link href={`/blog/${post.slug}`}>
 
@@ -13,36 +18,49 @@ export default function BlogCard({ post }: { post: BlogPost }) {
         whileHover={{ y: -6 }}
         transition={{ type: "spring", stiffness: 200, damping: 15 }}
         className="
-          group rounded-xl overflow-hidden
-          border border-(--color-border)
-          bg-white
-          hover:shadow-xl
-          transition
-        "
+    group rounded-xl overflow-hidden
+    border border-(--color-border)
+    bg-white
+    hover:shadow-xl
+    transition
+  "
       >
 
         {/* IMAGE */}
         <div className="relative h-44 overflow-hidden">
-          <motion.div
-            whileHover={{ scale: 1.06 }}
-            transition={{ duration: 0.4 }}
-          >
-            <Image
-              src={post.image}
-              alt={post.title}
-              fill
-              className="object-cover"
-            />
-          </motion.div>
+          <Image
+            src={post.image || "/blog/default.jpg"}
+            alt={post.title}
+            fill
+            className="
+        object-cover
+        transition-transform duration-500
+        group-hover:scale-105
+      "
+          />
         </div>
 
         {/* CONTENT */}
         <div className="p-5">
 
-          {/* CATEGORY */}
-          <span className="text-xs text-accent font-medium">
-            {post.category}
-          </span>
+          {/* META */}
+          <div className="flex items-center gap-2 text-xs text-(--color-muted-light)">
+
+            {post.category && (
+              <span className="text-accent font-medium">
+                {post.category}
+              </span>
+            )}
+
+            {post.date && (
+              <span>• {post.date}</span>
+            )}
+
+            {post.readingTime && (
+              <span>• {post.readingTime} min</span>
+            )}
+
+          </div>
 
           {/* TITLE */}
           <h3 className="mt-2 font-semibold text-(--color-text-light)">
