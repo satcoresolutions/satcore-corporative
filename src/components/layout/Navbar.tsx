@@ -30,8 +30,10 @@ export default function Navbar() {
                     bg-[rgba(10,37,64,0.85)]
                     shadow-[0_10px_40px_rgba(0,0,0,0.4)]
                 ">
-                    
-                    <BrandLogo variant="normal" usage="navbar" />
+
+                    <Link href="/">
+                        <BrandLogo variant="normal" usage="navbar" />
+                    </Link>
 
                     {/* DESKTOP ONLY (≥1024px) */}
                     <div className="hidden lg:flex items-center gap-8 text-sm font-medium text-white/80">

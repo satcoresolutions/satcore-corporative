@@ -31,27 +31,31 @@ const services: Service[] = [
   },
   {
     title: "Educación",
-    subtitle: "Capacitación y formación tecnológica",
+    subtitle: "Capacitación y formación tecnológica a medida",
     type: "educacion",
     active: true,
+    href: "/servicios/educacion",
   },
   {
     title: "Ciberseguridad",
     subtitle: "Auditorías y protección de sistemas",
     type: "ciberseguridad",
     active: true,
+    href: "/servicios/ciberseguridad",
   },
   {
     title: "Automatización",
     subtitle: "Agentes inteligentes y sistemas automatizados",
     type: "ia",
     active: true,
+    href: "/servicios/ia",
   },
   {
     title: "Marketing",
-    subtitle: "Diseño de marcas y contenido digital",
+    subtitle: "Diseño de marcas y contenido digital innovador",
     type: "branding",
     active: true,
+    href: "/servicios/branding",
   },
 ];
 

@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Globe, Layout, AppWindow, Shield, LucideIcon } from "lucide-react";
 import { Project, ProjectService } from "@/types/project";
 import { pushEvent } from "@/lib/analytics";
-import { motion } from "framer-motion";
 
 /* 🧠 CONFIG */
 const serviceConfig: Record<
@@ -49,23 +48,10 @@ export default function ProjectCard({ project }: { project: Project }) {
         e.preventDefault();
       }}
     >
-      <motion.div
-        className="group relative rounded-xl overflow-hidden cursor-pointer border border-white/10 h-full"
-        
-        /* 🎬 ENTRADA */
-        initial={{ opacity: 0, y: 25 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        viewport={{ once: true }}
-
-        /* 🖱️ HOVER */
-        whileHover={{ y: -6 }}
-      >
+      <div className="group relative rounded-xl overflow-hidden cursor-pointer border border-white/10 h-full transition-transform duration-300 hover:-translate-y-1.5">
 
         {/* IMAGE */}
-        <motion.div
-          className="overflow-hidden"
-        >
+        <div className="overflow-hidden">
           <Image
             src={project.image}
             alt={project.title}
@@ -73,59 +59,40 @@ export default function ProjectCard({ project }: { project: Project }) {
             height={300}
             className="object-cover w-full h-56 transition duration-500 group-hover:scale-110"
           />
-        </motion.div>
+        </div>
 
         {/* OVERLAY */}
-        <motion.div
-          className="absolute inset-0 bg-linear-to-t from-black via-black/70 to-transparent"
-          initial={{ opacity: 0.8 }}
-          whileHover={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-        />
+        <div className="absolute inset-0 bg-linear-to-t from-black via-black/70 to-transparent opacity-80 group-hover:opacity-100 transition duration-300" />
 
         {/* CONTENT */}
-        <div className="absolute inset-0 flex flex-col justify-end p-5">
+        <div className="absolute inset-0 flex flex-col p-5">
+          <div className="mt-auto">
 
-          {/* BADGE */}
-          {config && Icon && (
-            <motion.div
-              className="inline-flex items-center gap-2 text-xs font-medium text-accent mb-2"
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              viewport={{ once: true }}
-            >
-              <Icon size={14} />
-              <span>{config.label}</span>
-            </motion.div>
-          )}
+            {/* BADGE */}
+            {config && Icon && (
+              <div className="inline-flex items-center gap-2 text-xs font-medium text-accent mb-2">
+                <Icon size={14} />
+                <span>{config.label}</span>
+              </div>
+            )}
 
-          {/* TITLE */}
-          <h3 className="text-white font-semibold text-lg leading-tight">
-            {project.title}
-          </h3>
+            {/* TITLE */}
+            <h3 className="text-white font-semibold text-lg leading-tight">
+              {project.title}
+            </h3>
 
-          {/* DESCRIPTION */}
-          <motion.p
-            className="text-gray-300 text-sm mt-1"
-            initial={{ opacity: 0, y: 10 }}
-            whileHover={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            {project.description}
-          </motion.p>
+            {/* DESCRIPTION */}
+            <p className="text-gray-300 text-sm mt-1">
+              {project.description}
+            </p>
+
+          </div>
         </div>
 
         {/* BORDER HOVER */}
-        <motion.div
-          className="absolute inset-0 border border-transparent rounded-xl"
-          whileHover={{
-            borderColor: "rgba(0,255,150,0.4)",
-          }}
-          transition={{ duration: 0.3 }}
-        />
+        <div className="absolute inset-0 border border-transparent rounded-xl group-hover:border-[rgba(0,255,150,0.4)] transition duration-300" />
 
-      </motion.div>
+      </div>
     </Link>
   );
 }

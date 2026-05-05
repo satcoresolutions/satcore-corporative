@@ -55,4 +55,13 @@ export const projects: Project[] = [
     image: "/img/projects/Generador_contraseñas.png",
     href: "https://generador-contrasenas-pro.onrender.com/",
   },
+  {
+    id: 7,
+    title: "Landing Page Vanguardia",
+    description: "Landing page optimizada para conversión enfocada en captación de leads y validación de productos digitales.",
+    category: "software",
+    service: "landing",
+    image: "/img/projects/lp_vanguardia.png",
+    href: "https://lp-vanguardia.vercel.app/",
+  }
 ];
