@@ -6,9 +6,12 @@ const withBundleAnalyzer = bundleAnalyzer({
 });
 
 const nextConfig: NextConfig = {
+  transpilePackages: ["next-mdx-remote"],
+
   images: {
     formats: ["image/avif", "image/webp"],
   },
+
   headers: async () => [
     {
       source: "/(.*)",
