@@ -19,7 +19,7 @@
 
 ## 🧠 Sobre el Proyecto
 
-**SatCore Solutions** es una plataforma web moderna diseñada para posicionar una marca tecnológica premium, enfocada en:
+**SatCore Solutions** es una plataforma web moderna diseñada para posicionar una marca tecnológica premium, enfocada en: 
 
 - Desarrollo de software a medida
 - Ciberseguridad
